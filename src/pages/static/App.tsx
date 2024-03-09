@@ -8,9 +8,21 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
+import useStoreUserEffect from "../../hooks/useStoreUserEffect";
 
 const App = () => {
   const navigation = useNavigation();
+  const { isAuthenticated, isLoading } = useConvexAuth();
+  // const userId = useStoreUserEffect();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  // if (userId === null) {
+  //   return <div>Storing user...</div>;
+  // }
+
   return (
     <div>
       <Navbar />
