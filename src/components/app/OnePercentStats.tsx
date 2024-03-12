@@ -48,7 +48,8 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 					<Area
 						type='monotone'
 						dataKey='progress'
-						stroke={avergeProgress >= 1 ? '#00ff0060' : '#ff000060'}
+						stroke={avergeProgress >= 1 ? '#00ff00' : '#ff0000'}
+						fill={avergeProgress >= 1 ? '#00ff0040' : '#ff000040'}
 					/>
 					<XAxis dataKey='date' />
 					<YAxis />
