@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as habit from "../habit.js";
 import type * as user from "../user.js";
 
 /**
@@ -25,6 +26,7 @@ import type * as user from "../user.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  habit: typeof habit;
   user: typeof user;
 }>;
 export declare const api: FilterApi<

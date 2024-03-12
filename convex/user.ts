@@ -29,20 +29,3 @@ export const storeUser = mutation({
 		});
 	},
 });
-
-export const getUser = mutation({
-	args: {},
-	handler: async (ctx) => {
-		const identity = await ctx.auth.getUserIdentity();
-		if (identity === null) {
-			throw new Error('Called getUser without authentication present');
-		}
-		const storeUser = await ctx.db
-			.query('users')
-			.filter((q) =>
-				q.eq(q.field('tokenIdentifier'), identity.tokenIdentifier)
-			)
-			.unique();
-		return { ...storeUser, ...identity };
-	},
-});
