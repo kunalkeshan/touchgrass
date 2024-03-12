@@ -4,6 +4,7 @@ import './index.css';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes';
 import { Toaster } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { ConvexReactClient } from 'convex/react';
 import { ClerkProvider, useAuth } from '@clerk/clerk-react';
 import { ConvexProviderWithClerk } from 'convex/react-clerk';
@@ -15,14 +16,16 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
-			<ClerkProvider
-				publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
-			>
-				<ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-					<RouterProvider router={router} />
-					<Toaster />
-				</ConvexProviderWithClerk>
-			</ClerkProvider>
+			<TooltipProvider>
+				<ClerkProvider
+					publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
+				>
+					<ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+						<RouterProvider router={router} />
+						<Toaster />
+					</ConvexProviderWithClerk>
+				</ClerkProvider>
+			</TooltipProvider>
 		</QueryClientProvider>
 	</React.StrictMode>
 );
