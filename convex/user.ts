@@ -1,14 +1,11 @@
-import { ConvexError } from 'convex/values';
 import { mutation } from './_generated/server';
 
-export const store = mutation({
+export const storeUser = mutation({
 	args: {},
 	handler: async (ctx) => {
 		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new ConvexError(
-				'Called storeUser without authentication present'
-			);
+		if (identity === null) {
+			throw new Error('Called storeUser without authentication present');
 		}
 
 		// Check if we've already stored this identity before.
@@ -30,5 +27,22 @@ export const store = mutation({
 			name: identity.name!,
 			tokenIdentifier: identity.tokenIdentifier,
 		});
+	},
+});
+
+export const getUser = mutation({
+	args: {},
+	handler: async (ctx) => {
+		const identity = await ctx.auth.getUserIdentity();
+		if (identity === null) {
+			throw new Error('Called getUser without authentication present');
+		}
+		const storeUser = await ctx.db
+			.query('users')
+			.filter((q) =>
+				q.eq(q.field('tokenIdentifier'), identity.tokenIdentifier)
+			)
+			.unique();
+		return { ...storeUser, ...identity };
 	},
 });
