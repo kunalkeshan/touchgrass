@@ -41,7 +41,16 @@ const IndividualProgress = () => {
 		<div>
 			{loading ? <p>Loading...</p> : null}
 			{isError ? <p>Something went wrong...</p> : null}
-			{data ? <p>{JSON.stringify(data)}</p> : null}
+			{data ? (
+				<div>
+					<h1 className='text-xl lg:text-3xl font-semibold'>
+						Progress on {data.name}
+					</h1>
+					<p className='text-slate-300'>
+						Here's an overview of your progress on this habit.
+					</p>
+				</div>
+			) : null}
 		</div>
 	);
 };

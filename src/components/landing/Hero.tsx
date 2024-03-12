@@ -59,7 +59,12 @@ const Hero = () => {
 				</Authenticated>
 				<Unauthenticated>
 					<Button className='' variant={'secondary'}>
-						<SignInButton>Get Started</SignInButton>
+						<SignInButton
+							afterSignInUrl='/app'
+							afterSignUpUrl='/app'
+						>
+							Get Started
+						</SignInButton>
 					</Button>
 				</Unauthenticated>
 				<AuthLoading>

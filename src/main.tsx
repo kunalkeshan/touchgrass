@@ -11,7 +11,7 @@ import { ConvexProviderWithClerk } from 'convex/react-clerk';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>

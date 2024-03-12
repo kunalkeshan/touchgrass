@@ -11,13 +11,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useState } from 'react';
 import { RotateCw } from 'lucide-react';
+import { queryClient } from '@/main';
 
 const formSchema = z.object({
 	name: z
@@ -50,6 +51,7 @@ const NewHabit = () => {
 			}
 			const userId = await storeUser();
 			await createHabit({ ...values, userId });
+			queryClient.fetchQuery(['all-habits']);
 			toast.success('Habit created!');
 			form.reset();
 			navigate('/app');

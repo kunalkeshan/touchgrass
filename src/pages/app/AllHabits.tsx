@@ -2,6 +2,15 @@ import { api } from '../../../convex/_generated/api';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import HabitCard from '@/components/app/habits/HabitCard';
+import { useEffect, useReducer } from 'react';
+import { DataModel } from '../../../convex/_generated/dataModel';
+
+type CombinedHabits = {
+	habit: DataModel['habits']['document'];
+	entry: DataModel['entries']['document'];
+	habitId: DataModel['habits']['document']['_id'];
+}[];
 
 const AllHabits = () => {
 	const navigate = useNavigate();
@@ -13,6 +22,7 @@ const AllHabits = () => {
 		data,
 		isLoading: loading,
 		isError,
+		refetch,
 	} = useQuery({
 		queryKey: ['all-habits'],
 		queryFn: async () => {
@@ -27,6 +37,44 @@ const AllHabits = () => {
 		},
 	});
 
+	const [habits, setHabits] = useReducer<
+		(
+			state: CombinedHabits,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			action: { type: string; payload: any }
+		) => CombinedHabits
+	>((state, action) => {
+		switch (action.type) {
+			case 'ADD_HABITS': {
+				return action.payload;
+			}
+			case 'UPDATE_HABIT_ENTRY': {
+				const updatedHabits = state.map((habit) => {
+					if (habit.habitId === action.payload.habitId) {
+						return {
+							...habit,
+							entry: {
+								...habit.entry,
+								value: action.payload.entryValue,
+							},
+						};
+					}
+					return habit;
+				});
+				refetch();
+				return updatedHabits;
+			}
+			default:
+				return state;
+		}
+	}, []);
+
+	useEffect(() => {
+		if (data) {
+			setHabits({ type: 'ADD_HABITS', payload: data });
+		}
+	}, [data]);
+
 	return (
 		<div>
 			<h1 className='text-xl lg:text-3xl font-semibold'>All Habits</h1>
@@ -36,7 +84,61 @@ const AllHabits = () => {
 			</p>
 			{loading ? <p>Loading...</p> : null}
 			{isError ? <p>Something went wrong...</p> : null}
-			{data ? <p>{JSON.stringify(data)}</p> : null}
+			{data ? (
+				<div className='mt-8 flex flex-col gap-8'>
+					<section>
+						<h2 className='text-base lg:text-2xl font-medium'>
+							Show up!
+						</h2>
+						<div className='mt-4 flex flex-col gap-4'>
+							{habits
+								.filter((h) => h.entry?.value === 'N')
+								.map((habit) => (
+									<HabitCard
+										key={habit.habit._id}
+										habit={habit.habit}
+										entry={habit.entry!}
+										editHabit={setHabits}
+									/>
+								))}
+						</div>
+					</section>
+					<section>
+						<h2 className='text-base lg:text-2xl font-medium'>
+							Success
+						</h2>
+						<div className='mt-4 flex flex-col gap-4'>
+							{habits
+								.filter((h) => h.entry?.value === 'P')
+								.map((habit) => (
+									<HabitCard
+										key={habit.habit._id}
+										habit={habit.habit}
+										entry={habit.entry!}
+										editHabit={setHabits}
+									/>
+								))}
+						</div>
+					</section>
+					<section>
+						<h2 className='text-base lg:text-2xl font-medium'>
+							Failed
+						</h2>
+						<div className='mt-4 flex flex-col gap-4'>
+							{habits
+								.filter((h) => h.entry?.value === 'A')
+								.map((habit) => (
+									<HabitCard
+										key={habit.habit._id}
+										habit={habit.habit}
+										entry={habit.entry!}
+										editHabit={setHabits}
+									/>
+								))}
+						</div>
+					</section>
+				</div>
+			) : null}
 		</div>
 	);
 };
