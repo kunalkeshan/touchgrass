@@ -30,7 +30,7 @@ const Hero = () => {
 	return (
 		<section className='p-4 md:p-16 bg-[url(/images/bg-lines.png)] min-h-[60vh] w-full'>
 			<div className='w-full max-w-7xl mx-auto'>
-				<h1 className='text-2xl lg:text-4xl text-center'>
+				<h1 className='text-2xl lg:text-4xl text-center font-bold'>
 					Welcome to Touchgrass. Your habit tracking app.
 				</h1>
 			</div>

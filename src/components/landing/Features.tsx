@@ -111,7 +111,7 @@ const Features = () => {
 	return (
 		<section className='p-4 md:p-16' id='features'>
 			<div className='w-full max-w-7xl mx-auto'>
-				<h2 className='text-xl lg:text-3xl text-center'>
+				<h2 className='text-xl lg:text-3xl text-center font-semibold'>
 					Why Touchgrass?
 				</h2>
 			</div>
@@ -121,9 +121,9 @@ const Features = () => {
 						key={`feature-${idx}`}
 						className='inline-flex p-2 border rounded-lg relative gap-2 hover:-translate-y-1 select-none hover:shadow-sm transition-all duration-300 hover:shadow-white'
 					>
-						<feature.Icon className='shrink-0' />
+						<feature.Icon className='shrink-0 mt-1' />
 						<div>
-							<h3 className='text-base lg:text-lg'>
+							<h3 className='text-base lg:text-lg font-medium'>
 								{feature.title}
 							</h3>
 							<p className='text-sm text-slate-300'>
