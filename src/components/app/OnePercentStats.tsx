@@ -25,8 +25,7 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 			else if (entry.value === 'P') daysShowedUp++;
 			return {
 				date: entry.date,
-				progress:
-					1 ** ((daysShowedUp - daysMissed) / data.entries.length),
+				progress: 1.01 ** (daysShowedUp - daysMissed),
 			};
 		});
 	}, [data]);
