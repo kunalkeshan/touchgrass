@@ -4,7 +4,7 @@ import { FOOTER_NAVIGATION } from '@/constants/navigation';
 const Footer = () => {
 	return (
 		<footer className='p-4 md:px-16'>
-			<div className='w-full max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2'>
+			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2'>
 				<Link
 					to='/'
 					className='hover:scale-105 transition-all duration-300 flex items-center gap-1'
@@ -41,7 +41,7 @@ const Footer = () => {
 				</ul>
 			</div>
 			<hr className='my-4 border-b border-b-slate-700' />
-			<div className='w-full max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2'>
+			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2'>
 				<p className='text-sm'>
 					&copy; 2024 Touchgrass. All rights reserved.
 				</p>

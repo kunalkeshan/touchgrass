@@ -11,11 +11,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
+import { useState } from 'react';
+import { RotateCw } from 'lucide-react';
 
 const formSchema = z.object({
 	name: z
@@ -29,6 +31,7 @@ const NewHabit = () => {
 	const { isAuthenticated, isLoading } = useConvexAuth();
 	const createHabit = useMutation(api.habit.createHabit);
 	const storeUser = useMutation(api.user.storeUser);
+	const [submitting, setSubmitting] = useState(false);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -38,6 +41,7 @@ const NewHabit = () => {
 	});
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
+		setSubmitting(true);
 		try {
 			if (isLoading) return;
 			if (!isAuthenticated) {
@@ -51,6 +55,8 @@ const NewHabit = () => {
 			navigate('/app');
 		} catch (error) {
 			toast.error('Something went wrong! Please try again.');
+		} finally {
+			setSubmitting(false);
 		}
 	}
 	return (
@@ -70,6 +76,7 @@ const NewHabit = () => {
 					<FormField
 						control={form.control}
 						name='name'
+						disabled={submitting}
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Name</FormLabel>
@@ -92,9 +99,19 @@ const NewHabit = () => {
 					<Button
 						type='submit'
 						variant={'secondary'}
-						className='w-full'
+						className={`${
+							submitting ? 'animate-pulse' : ''
+						} w-full`}
+						disabled={submitting}
 					>
-						Create
+						{submitting ? (
+							<RotateCw
+								className='animate-spin mr-2'
+								size={16}
+								strokeWidth={2.5}
+							/>
+						) : null}
+						{submitting ? 'Saving...' : 'Create'}
 					</Button>
 				</form>
 			</Form>

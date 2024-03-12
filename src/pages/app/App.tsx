@@ -15,8 +15,8 @@ const App = () => {
 		return <Navigate to='/' />;
 	} else {
 		return (
-			<div className='w-full min-h-screen'>
-				<div className='max-w-7xl mx-auto w-full p-4 md:p-16'>
+			<div className='w-full min-h-screen bg-[url(/images/bg-lines.png)]'>
+				<div className='max-w-5xl 2xl:max-w-7xl mx-auto w-full p-4 md:p-16'>
 					{navigation.state === 'loading' ? <Loader /> : <Outlet />}
 				</div>
 				<Navbar />

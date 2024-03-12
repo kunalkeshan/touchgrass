@@ -110,7 +110,7 @@ const Features = () => {
 
 	return (
 		<section className='p-4 md:p-16' id='features'>
-			<div className='w-full max-w-7xl mx-auto'>
+			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto'>
 				<h2 className='text-xl lg:text-3xl text-center font-semibold'>
 					Why Touchgrass?
 				</h2>

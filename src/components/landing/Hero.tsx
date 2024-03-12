@@ -29,13 +29,13 @@ const Hero = () => {
 
 	return (
 		<section className='p-4 md:p-16 bg-[url(/images/bg-lines.png)] min-h-[60vh] w-full'>
-			<div className='w-full max-w-7xl mx-auto'>
+			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto'>
 				<h1 className='text-2xl lg:text-4xl text-center font-bold'>
 					Welcome to Touchgrass. Your habit tracking app.
 				</h1>
 			</div>
 			<div>
-				<div className='grid grid-cols-2 gap-4 lg:grid-cols-5 mt-8 place-items-center'>
+				<div className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 mt-8 place-items-center'>
 					{people.map((person, index) => (
 						<div
 							key={`person-${index}`}
@@ -63,8 +63,8 @@ const Hero = () => {
 					</Button>
 				</Unauthenticated>
 				<AuthLoading>
-					<Button className='' variant={'secondary'}>
-						<SignInButton>Get Started</SignInButton>
+					<Button className='' variant={'secondary'} disabled>
+						Loading
 					</Button>
 				</AuthLoading>
 				<Button asChild className='bg-black hover:bg-black/80'>

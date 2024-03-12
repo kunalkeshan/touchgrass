@@ -9,7 +9,7 @@ const Navbar = () => {
 	const location = useLocation();
 	return (
 		<nav className='w-full p-4 md:px-16'>
-			<div className='w-full max-w-7xl mx-auto flex items-center justify-between'>
+			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto flex items-center justify-between'>
 				<Link
 					to='/'
 					className='aspect-square w-12 hover:scale-105 transition-all duration-300'
@@ -55,8 +55,8 @@ const Navbar = () => {
 						</Button>
 					</Unauthenticated>
 					<AuthLoading>
-						<Button variant={'secondary'} asChild>
-							<SignInButton>Get Started</SignInButton>
+						<Button variant={'secondary'} disabled>
+							Loading
 						</Button>
 					</AuthLoading>
 					<SheetNav />
