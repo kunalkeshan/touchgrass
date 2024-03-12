@@ -1,9 +1,11 @@
 import { api } from '../../../convex/_generated/api';
 import { useConvexAuth, useMutation } from 'convex/react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Id } from 'convex/_generated/dataModel';
 import Loader from '@/components/layouts/Loader';
+import ContributionsGraph from '@/components/app/ContributionsGraph';
+import OnePercentStats from '@/components/app/OnePercentStats';
 
 const IndividualProgress = () => {
 	const navigate = useNavigate();
@@ -44,12 +46,28 @@ const IndividualProgress = () => {
 			{isError ? <p>Something went wrong...</p> : null}
 			{data ? (
 				<div>
-					<h1 className='text-xl lg:text-3xl font-semibold'>
-						Progress on {data.name}
-					</h1>
-					<p className='text-slate-300'>
-						Here's an overview of your progress on this habit.
-					</p>
+					<section className='flex justify-between'>
+						<div className=''>
+							<h1 className='text-xl lg:text-3xl font-semibold'>
+								Progress on {data.name}
+							</h1>
+							<p className='text-slate-300'>
+								Here's an overview of your progress on this
+								habit.
+							</p>
+						</div>
+						<Link to={'/app'} className='underline'>
+							Go back
+						</Link>
+					</section>
+					<ContributionsGraph
+						data={data}
+						key={`contributing-graph-individual-${data._id}`}
+					/>
+					<OnePercentStats
+						data={data}
+						key={`one-percent-stats-individual-${data._id}`}
+					/>
 				</div>
 			) : null}
 		</div>

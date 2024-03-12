@@ -13,21 +13,29 @@ body {
 
 .days {
 	display: grid;
-	grid-gap: 2px;
+	grid-gap: 4px;
 	/* margin: 10px 0;
   padding: 15px;
   border: 1px solid white;
   border-radius: 13px; */
-	grid-template-columns: repeat(auto-fill, 10px);
+	grid-template-columns: repeat(auto-fill, 16px);
 	box-shadow: 0 15px 35px 0 rgba(42, 51, 83, 0.12),
 		0 5px 15px rgba(0, 0, 0, 0.06);
 }
 
 .day {
-	height: 10px;
+	height: 16px;
 	background-color: #fef2d4;
 }
 
 .day--active {
-	background-color: #ffc107;
+	background-color: #00ff00;
+}
+
+.day--inactive {
+	background-color: #ff0000;
+}
+
+.day--no-data {
+	background-color: #808080;
 }

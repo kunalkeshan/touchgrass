@@ -62,6 +62,9 @@ export const getHabitAndEntries = mutation({
 	args: { habitId: v.id('habits') },
 	handler: async (ctx, args) => {
 		const habit = await ctx.db.get(args.habitId);
+		if (!habit) {
+			throw new Error('Habit not found');
+		}
 		const entries = await ctx.db
 			.query('entries')
 			.order('desc')

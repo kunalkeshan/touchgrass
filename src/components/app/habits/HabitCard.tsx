@@ -62,7 +62,9 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 	return (
 		<Card className='flex items-center justify-between'>
 			<CardHeader
-				className={`${entry.value !== 'N' ? 'line-through' : ''}`}
+				className={`${
+					entry.value !== 'N' ? 'line-through' : ''
+				} flex-1`}
 			>
 				<CardTitle>{habit.name}</CardTitle>
 				<CardDescription>
