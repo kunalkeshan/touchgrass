@@ -1,5 +1,5 @@
+import { Pin } from 'lucide-react';
 import ContributionsGraph from './ContributionsGraph';
-import { MdOutlinePushPin } from 'react-icons/md';
 
 export default function PinnedHabits() {
 	return (
@@ -7,7 +7,7 @@ export default function PinnedHabits() {
 			<div className='flex justify-between items-center mb-2'>
 				<h2 className='font-semibold'>Pinned Habits</h2>
 				<p className='flex items-center'>
-					2 <MdOutlinePushPin />
+					2 <Pin />
 				</p>
 			</div>
 			<ContributionsGraph />
