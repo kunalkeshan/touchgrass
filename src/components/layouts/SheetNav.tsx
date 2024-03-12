@@ -9,9 +9,10 @@ import {
 import { Menu } from 'lucide-react';
 import { Button } from '../ui/button';
 import { NAVBAR_NAVIGATION } from '@/constants/navigation';
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const SheetNav = () => {
+	const location = useLocation();
 	return (
 		<Sheet>
 			<SheetTrigger asChild className='flex lg:hidden'>
@@ -43,20 +44,16 @@ const SheetNav = () => {
 							key={`navbar-sheet-link-${nav.url}`}
 							className='inline-block'
 						>
-							<NavLink
+							<Link
 								to={nav.url}
-								className={({ isActive, isPending }) =>
-									`${
-										isActive
-											? 'underline'
-											: isPending
-											? ''
-											: ''
-									} hover:underline transition-all duration-300 hover:text-green-500`
-								}
+								className={`${
+									location.pathname === nav.url
+										? 'underline'
+										: ''
+								} hover:underline transition-all duration-300 hover:text-green-500`}
 							>
 								{nav.name}
-							</NavLink>
+							</Link>
 						</li>
 					))}
 				</ul>

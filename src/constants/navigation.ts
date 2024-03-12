@@ -1,5 +1,13 @@
 // Navigation Links
 
+import {
+	AreaChart,
+	Home,
+	LucideIcon,
+	PlusCircle,
+	UserCircle,
+} from 'lucide-react';
+
 type NavigationType = Readonly<{
 	name: string;
 	url: string;
@@ -33,4 +41,31 @@ export const FOOTER_NAVIGATION: NavigationType[] = [
 	//     url: '/terms',
 	//     target: '_self',
 	// },
+];
+
+export const APP_NAVIGATION: (NavigationType & { Icon: LucideIcon })[] = [
+	{
+		name: 'Overall Progress',
+		url: '/app/overall-progress',
+		target: '_self',
+		Icon: AreaChart,
+	},
+	{
+		name: 'Home',
+		url: '/app',
+		target: '/self',
+		Icon: Home,
+	},
+	{
+		name: 'New Habit',
+		url: '/app/new-habit',
+		target: '_self',
+		Icon: PlusCircle,
+	},
+	{
+		name: 'Profile',
+		url: '/app/me',
+		target: '_self',
+		Icon: UserCircle,
+	},
 ];

@@ -55,10 +55,17 @@ const NewHabit = () => {
 	}
 	return (
 		<div>
+			<h1 className='text-xl lg:text-3xl font-semibold'>
+				Create a new habit
+			</h1>
+			<p className='text-slate-300'>
+				To create a new habit, please enter the name of the habit you
+				want to track.
+			</p>
 			<Form {...form}>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
-					className='space-y-8'
+					className='space-y-8 mt-8'
 				>
 					<FormField
 						control={form.control}
@@ -82,7 +89,13 @@ const NewHabit = () => {
 							</FormItem>
 						)}
 					/>
-					<Button type='submit'>Submit</Button>
+					<Button
+						type='submit'
+						variant={'secondary'}
+						className='w-full'
+					>
+						Create
+					</Button>
 				</form>
 			</Form>
 		</div>

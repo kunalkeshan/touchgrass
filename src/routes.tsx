@@ -10,6 +10,7 @@ import AllHabits from './pages/app/AllHabits';
 import NewHabit from './pages/app/NewHabit';
 import IndividualProgress from './pages/app/IndividualProgress';
 import OverallProgress from './pages/app/OverallProgress';
+import Profile from './pages/app/Profile';
 
 // Others
 import ErrorPage from './components/layouts/ErrorPage';
@@ -44,6 +45,10 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 			{
 				path: 'overall-progress',
 				element: <OverallProgress />,
+			},
+			{
+				path: 'me',
+				element: <Profile />,
 			},
 		],
 		errorElement: <ErrorPage />,

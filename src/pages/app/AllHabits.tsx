@@ -29,6 +29,11 @@ const AllHabits = () => {
 
 	return (
 		<div>
+			<h1 className='text-xl lg:text-3xl font-semibold'>All Habits</h1>
+			<p className='text-slate-300'>
+				Here's an overview of all your habits. You can see your progress
+				here.
+			</p>
 			{loading ? <p>Loading...</p> : null}
 			{isError ? <p>Something went wrong...</p> : null}
 			{data ? <p>{JSON.stringify(data)}</p> : null}

@@ -1,11 +1,12 @@
 import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react';
 import { SignInButton } from '@clerk/clerk-react';
 import { Button } from '@/components/ui/button';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { NAVBAR_NAVIGATION } from '@/constants/navigation';
 import SheetNav from './SheetNav';
 
 const Navbar = () => {
+	const location = useLocation();
 	return (
 		<nav className='w-full p-4 md:px-16'>
 			<div className='w-full max-w-7xl mx-auto flex items-center justify-between'>
@@ -25,20 +26,16 @@ const Navbar = () => {
 							key={`navbar-link-${nav.url}`}
 							className='inline-block'
 						>
-							<NavLink
+							<Link
 								to={nav.url}
-								className={({ isActive, isPending }) =>
-									`${
-										isActive
-											? 'underline'
-											: isPending
-											? ''
-											: ''
-									} hover:underline transition-all duration-300 hover:text-green-500`
-								}
+								className={`${
+									location.pathname === nav.url
+										? 'underline'
+										: ''
+								} hover:underline transition-all duration-300 hover:text-green-500`}
 							>
 								{nav.name}
-							</NavLink>
+							</Link>
 						</li>
 					))}
 				</ul>
