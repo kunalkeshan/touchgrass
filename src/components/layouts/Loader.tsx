@@ -1,9 +1,27 @@
+import { cn } from '@/lib/utils';
 import React from 'react';
 
-const Loader: React.FC = () => {
+type Props = React.ComponentProps<'div'>;
+
+const Loader: React.FC<Props> = ({ className, ...props }) => {
 	return (
-		<div className=''>
-			<p className='animate-pulse'>Loading...</p>
+		<div
+			className={cn(
+				'w-full h-full flex flex-col items-center justify-center',
+				className
+			)}
+			{...props}
+		>
+			<div className='w-40 aspect-square'>
+				<img
+					src='/images/loading.gif'
+					alt='Loading...'
+					className='w-full h-auto object-contain'
+				/>
+			</div>
+			<p className='animate-pulse text-lg lg:text-2xl font-semibold'>
+				Loading...
+			</p>
 		</div>
 	);
 };

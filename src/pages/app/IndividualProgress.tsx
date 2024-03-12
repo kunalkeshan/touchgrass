@@ -3,6 +3,7 @@ import { useConvexAuth, useMutation } from 'convex/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Id } from 'convex/_generated/dataModel';
+import Loader from '@/components/layouts/Loader';
 
 const IndividualProgress = () => {
 	const navigate = useNavigate();
@@ -39,7 +40,7 @@ const IndividualProgress = () => {
 	});
 	return (
 		<div>
-			{loading ? <p>Loading...</p> : null}
+			{loading ? <Loader /> : null}
 			{isError ? <p>Something went wrong...</p> : null}
 			{data ? (
 				<div>

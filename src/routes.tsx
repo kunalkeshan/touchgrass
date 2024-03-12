@@ -25,6 +25,7 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 				element: <Landing />,
 			},
 		],
+		errorElement: <ErrorPage />,
 	},
 	{
 		path: '/app',

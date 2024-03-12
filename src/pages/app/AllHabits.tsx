@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import HabitCard from '@/components/app/habits/HabitCard';
 import { useEffect, useReducer } from 'react';
 import { DataModel } from '../../../convex/_generated/dataModel';
+import Loader from '@/components/layouts/Loader';
 
 type CombinedHabits = {
 	habit: DataModel['habits']['document'];
@@ -82,7 +83,7 @@ const AllHabits = () => {
 				Here's an overview of all your habits. You can see your progress
 				here.
 			</p>
-			{loading ? <p>Loading...</p> : null}
+			{loading ? <Loader /> : null}
 			{isError ? <p>Something went wrong...</p> : null}
 			{data ? (
 				<div className='mt-8 flex flex-col gap-8'>
