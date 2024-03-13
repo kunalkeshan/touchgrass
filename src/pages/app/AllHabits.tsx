@@ -66,6 +66,19 @@ const AllHabits = () => {
 				refetch();
 				return updatedHabits;
 			}
+			case 'UPDATE_HABIT_NAME': {
+				const updatedHabits = state.map((habit) => {
+					if (habit.habitId === action.payload.habitId) {
+						return {
+							...habit,
+							name: action.payload.name,
+						};
+					}
+					return habit;
+				});
+				refetch();
+				return updatedHabits;
+			}
 			default:
 				return state;
 		}

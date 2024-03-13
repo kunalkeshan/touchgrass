@@ -116,3 +116,10 @@ export const getOverallHabitStats = mutation({
 		return { habits, onePercentProgressHabits };
 	},
 });
+
+export const updateHabitName = mutation({
+	args: { habitId: v.id('habits'), name: v.string() },
+	handler: async (ctx, args) => {
+		return await ctx.db.patch(args.habitId, { name: args.name });
+	},
+});

@@ -32,6 +32,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
+import EditHabitDialog from './EditHabitDialog';
 
 type Props = React.ComponentProps<typeof Card> & {
 	habit: DataModel['habits']['document'];
@@ -73,50 +74,19 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 			</CardHeader>
 			<CardFooter className='flex items-center gap-2 pb-0'>
 				{entry.value !== 'P' ? (
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<Button
-								variant='secondary'
-								className='text-green-500'
-								size={'icon'}
-								onClick={handleUpdateHabitEntry('P')}
-							>
-								<Check className='w-6 h-6' />
-							</Button>
-						</TooltipTrigger>
-						<TooltipContent>Mark as done</TooltipContent>
-					</Tooltip>
+					<CheckHabitAsCompleted
+						updateValue={handleUpdateHabitEntry('P')}
+					/>
 				) : null}
 				{entry.value !== 'A' ? (
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<Button
-								variant='secondary'
-								className='text-red-500'
-								size={'icon'}
-								onClick={handleUpdateHabitEntry('A')}
-							>
-								<CircleX className='w-6 h-6' />
-							</Button>
-						</TooltipTrigger>
-						<TooltipContent>Mark as not done</TooltipContent>
-					</Tooltip>
+					<CheckHabitAsFailed
+						updateValue={handleUpdateHabitEntry('A')}
+					/>
 				) : null}
 				{entry.value !== 'N' ? (
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<Button
-								variant='secondary'
-								size={'icon'}
-								onClick={handleUpdateHabitEntry('N')}
-							>
-								<RotateCcw className='w-6 h-6' />
-							</Button>
-						</TooltipTrigger>
-						<TooltipContent>
-							Reset habit entry as yet to-do
-						</TooltipContent>
-					</Tooltip>
+					<CheckHabitAsMissed
+						updateValue={handleUpdateHabitEntry('N')}
+					/>
 				) : null}
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
@@ -131,7 +101,7 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 							<Button size={'sm'} asChild>
 								<Link
 									to={`${habit._id}/progress`}
-									className='w-full'
+									className='w-full flex justify-between'
 								>
 									<span>Learn more</span>
 									<ExternalLink
@@ -142,6 +112,17 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 								</Link>
 							</Button>
 						</DropdownMenuItem>
+						<DropdownMenuItem
+							className='p-0 mt-1'
+							onSelect={(e) => e.preventDefault()}
+							onClick={(e) => e.preventDefault()}
+						>
+							<EditHabitDialog
+								habit={habit}
+								editHabit={editHabit}
+								key={`edit-habit-dialog-${habit._id}`}
+							/>
+						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			</CardFooter>
@@ -150,3 +131,56 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 };
 
 export default HabitCard;
+
+type CheckHabitComponentProps = {
+	updateValue: () => Promise<void>;
+};
+
+const CheckHabitAsCompleted = ({ updateValue }: CheckHabitComponentProps) => {
+	return (
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<Button
+					variant='secondary'
+					className='text-green-500'
+					size={'icon'}
+					onClick={updateValue}
+				>
+					<Check className='w-6 h-6' />
+				</Button>
+			</TooltipTrigger>
+			<TooltipContent>Mark as done</TooltipContent>
+		</Tooltip>
+	);
+};
+
+const CheckHabitAsFailed = ({ updateValue }: CheckHabitComponentProps) => {
+	return (
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<Button
+					variant='secondary'
+					className='text-red-500'
+					size={'icon'}
+					onClick={updateValue}
+				>
+					<CircleX className='w-6 h-6' />
+				</Button>
+			</TooltipTrigger>
+			<TooltipContent>Mark as not done</TooltipContent>
+		</Tooltip>
+	);
+};
+
+const CheckHabitAsMissed = ({ updateValue }: CheckHabitComponentProps) => {
+	return (
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<Button variant='secondary' size={'icon'} onClick={updateValue}>
+					<RotateCcw className='w-6 h-6' />
+				</Button>
+			</TooltipTrigger>
+			<TooltipContent>Reset habit entry as yet to-do</TooltipContent>
+		</Tooltip>
+	);
+};
