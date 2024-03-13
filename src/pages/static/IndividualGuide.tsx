@@ -31,10 +31,10 @@ const IndividualGuide = () => {
 					<p className='font-heading font-medium text-xl tracking-wide'>
 						/
 						<Link
-							to='/resources'
+							to='/guides'
 							className='hover:underline underline-offset-4'
 						>
-							resources
+							guides
 						</Link>
 						/
 						<Link
