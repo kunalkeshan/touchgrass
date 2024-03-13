@@ -53,12 +53,12 @@ const Hero = () => {
 			</div>
 			<div className='mt-8 flex gap-4 justify-center'>
 				<Authenticated>
-					<Button className='' variant={'secondary'}>
+					<Button className='' variant={'secondary'} asChild>
 						<Link to={'/app'}>App</Link>
 					</Button>
 				</Authenticated>
 				<Unauthenticated>
-					<Button className='' variant={'secondary'}>
+					<Button className='' variant={'secondary'} asChild>
 						<SignInButton
 							afterSignInUrl='/app'
 							afterSignUpUrl='/app'
