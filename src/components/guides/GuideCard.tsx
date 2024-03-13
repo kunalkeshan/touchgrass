@@ -9,7 +9,7 @@ type Props = React.ComponentProps<'a'> & {
 const GuideCard: React.FC<Props> = ({ guide }) => {
 	return (
 		<Link
-			to={guide.url}
+			to={`/guides/${guide.url}`}
 			className='inline-flex flex-col w-full h-full group p-4 backdrop-blur-lg bg-white bg-opacity-[0.01] rounded-lg'
 		>
 			<div className='mx-auto'>
