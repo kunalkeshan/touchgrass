@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	AreaChart,
 	Area,
@@ -11,6 +11,7 @@ import {
 import { DataModel } from '../../../../convex/_generated/dataModel';
 import { Link } from 'react-router-dom';
 import { randomColor } from '@/lib/utils';
+import { badgeVariants } from '@/components/ui/badge';
 
 export type OverallProgressGraphProps = React.ComponentProps<'section'> & {
 	onePercentProgressHabits: Array<
@@ -32,6 +33,7 @@ const OverallProgressGraph: React.FC<OverallProgressGraphProps> = ({
 	habits,
 	onePercentProgressHabits,
 }) => {
+	const [selectedHabit, setSelectedHabit] = useState(habits[0]._id);
 	return (
 		<section>
 			<div className='border border-white rounded-xl p-6 mt-8'>
@@ -43,26 +45,54 @@ const OverallProgressGraph: React.FC<OverallProgressGraphProps> = ({
 					since you started on{' '}
 					{new Date(habits[0]._creationTime).toDateString()}.
 				</p>
+				<div className='mt-4'>
+					<p>Show for:</p>
+					<div className='flex flex-wrap items-center gap-2 mt-2'>
+						{habits.map((habit) => (
+							<button
+								onClick={() => setSelectedHabit(habit._id)}
+								key={`habit-order-setter-${habit._id}`}
+								className={badgeVariants({
+									variant:
+										selectedHabit === habit._id
+											? 'secondary'
+											: 'outline',
+									className:
+										selectedHabit === habit._id
+											? ''
+											: 'text-white',
+								})}
+							>
+								{habit.name}
+							</button>
+						))}
+					</div>
+				</div>
 				<ResponsiveContainer
 					width='100%'
 					height={300}
 					className={'mt-8'}
 				>
 					<AreaChart height={300} data={onePercentProgressHabits}>
-						{onePercentProgressHabits.map((entry, index) => {
-							return (
-								<Area
-									type='monotone'
-									dataKey={entry.habitName}
-									key={`overprogress-${entry._id}-area-${index}`}
-									stroke={randomColor()}
-									fillOpacity={0.2}
-								/>
-							);
-						})}
+						{onePercentProgressHabits
+							.filter((e) => e.habitId === selectedHabit)
+							.map((entry, index) => {
+								const color = randomColor();
+								return (
+									<Area
+										type='monotone'
+										dataKey={entry.habitName}
+										key={`overprogress-${entry._id}-area-${index}`}
+										stroke={color + '40'}
+										fillOpacity={0.2}
+										dot={true}
+										name={entry.habitName}
+									/>
+								);
+							})}
 						<XAxis dataKey='date' allowDuplicatedCategory={false} />
 						<YAxis />
-						<Tooltip />
+						<Tooltip labelClassName='text-black' />
 						<ReferenceLine
 							y={1}
 							stroke='green'

@@ -50,10 +50,11 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 						dataKey='progress'
 						stroke={avergeProgress >= 1 ? '#00ff00' : '#ff0000'}
 						fill={avergeProgress >= 1 ? '#00ff0040' : '#ff000040'}
+						dot={true}
 					/>
 					<XAxis dataKey='date' />
 					<YAxis />
-					<Tooltip />
+					<Tooltip labelClassName='text-black' />
 					<ReferenceLine y={1} stroke='green' label='No progress' />
 				</AreaChart>
 			</ResponsiveContainer>
