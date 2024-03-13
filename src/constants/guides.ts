@@ -27,6 +27,32 @@ export const GUIDES: Guide[] = [
 		},
 	},
 	{
+		title: "The 1% Progress Graph - How it's calculated & Why it matters?",
+		description:
+			'The 1% Progress Graph feature, designed to give you deeper insights into your growth journey.',
+		tags: ['Habits', 'Growth', 'Mindset'],
+		url: 'one-percent-progress',
+		image: '/images/guides/one-percent-progress.svg',
+		published: new Date('2024-03-13'),
+		author: {
+			name: 'Kunal Keshan',
+			social: 'https://x.com/_kunalkeshan_',
+		},
+	},
+	{
+		title: "Daily Activity - How it's calculated & Why it matters?",
+		description:
+			'A unique feature to help you track your daily activity and stay accountable to your goals.',
+		tags: ['Habits', 'Growth', 'Mindset'],
+		url: 'daily-activity',
+		image: '/images/guides/daily-activity.svg',
+		published: new Date('2024-03-13'),
+		author: {
+			name: 'Kunal Keshan',
+			social: 'https://x.com/_kunalkeshan_',
+		},
+	},
+	{
 		title: 'Welcome to Touch Grass: Your Path to Personal Growth',
 		description:
 			'We believe in the power of small steps towards personal growth and self-improvement. Our platform is designed to empower individuals to cultivate positive habits, track their progress, and celebrate their achievements along the way.',
