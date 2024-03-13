@@ -3,6 +3,7 @@ import useStoreUserEffect from '@/hooks/useStoreUserEffect';
 import { Navigate, Outlet, useNavigation } from 'react-router-dom';
 import { useConvexAuth } from 'convex/react';
 import Navbar from '@/components/app/Navbar';
+import ScrollToTop from '@/components/reusable/ScrollToTop';
 
 const App = () => {
 	const navigation = useNavigation();
@@ -20,6 +21,7 @@ const App = () => {
 					{navigation.state === 'loading' ? <Loader /> : <Outlet />}
 				</div>
 				<Navbar />
+				<ScrollToTop />
 			</div>
 		);
 	}

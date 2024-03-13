@@ -12,13 +12,14 @@ const Navbar = () => {
 			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto flex items-center justify-between'>
 				<Link
 					to='/'
-					className='aspect-square w-12 hover:scale-105 transition-all duration-300'
+					className='hover:scale-105 transition-all duration-300 flex items-center gap-1'
 				>
 					<img
 						src='/images/logo.png'
 						alt='Touchgrass'
-						className='w-full h-auto object-cover'
+						className='w-12 h-auto object-cover'
 					/>
+					<p className='text-lg self-end font-bold'>Touchgrass</p>
 				</Link>
 				<ul className='hidden lg:flex items-center gap-4'>
 					{NAVBAR_NAVIGATION.map((nav) => (
