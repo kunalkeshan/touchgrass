@@ -4,8 +4,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Id } from 'convex/_generated/dataModel';
 import Loader from '@/components/layouts/Loader';
-import ContributionsGraph from '@/components/app/ContributionsGraph';
-import OnePercentStats from '@/components/app/OnePercentStats';
+import ContributionsGraph from '@/components/app/habits/ContributionsGraph';
+import OnePercentStats from '@/components/app/habits/OnePercentStats';
 
 const IndividualProgress = () => {
 	const navigate = useNavigate();

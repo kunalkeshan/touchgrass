@@ -1,3 +1,4 @@
+import { DataModel } from './_generated/dataModel';
 import { mutation } from './_generated/server';
 import { v } from 'convex/values';
 
@@ -19,7 +20,6 @@ export const getHabits = mutation({
 						)
 					)
 					.unique();
-				console.log(entry);
 				if (!entry) {
 					await ctx.db.insert('entries', {
 						habitId: habit._id,
@@ -71,5 +71,48 @@ export const getHabitAndEntries = mutation({
 			.filter((q) => q.eq(q.field('habitId'), args.habitId))
 			.collect();
 		return { ...habit, entries };
+	},
+});
+
+export const getOverallHabitStats = mutation({
+	args: { userId: v.id('users') },
+	handler: async (ctx, args) => {
+		const allHabits = await ctx.db
+			.query('habits')
+			.order('desc')
+			.filter((q) => q.eq(q.field('userId'), args.userId))
+			.collect();
+		const habits = await Promise.all(
+			allHabits.map(async (habit) => {
+				const entries = await ctx.db
+					.query('entries')
+					.order('desc')
+					.filter((q) => q.eq(q.field('habitId'), habit._id))
+					.collect();
+				return { ...habit, entries };
+			})
+		);
+
+		type OnePercentProgressHabitData = DataModel['entries']['document'] & {
+			habitName: string;
+			[key: string]: number | string;
+		};
+
+		const onePercentProgressHabits: Array<OnePercentProgressHabitData> = [];
+		habits.forEach((habit) => {
+			let [daysShowedUp, daysMissed, progress] = [0, 0, 1];
+			habit.entries.forEach((entry) => {
+				if (entry.value === 'A') daysMissed++;
+				else if (entry.value === 'P') daysShowedUp++;
+				progress = 1.01 ** (daysShowedUp - daysMissed);
+				onePercentProgressHabits.push({
+					...entry,
+					[habit.name]: progress,
+					habitName: habit.name,
+				} as OnePercentProgressHabitData);
+			});
+		});
+
+		return { habits, onePercentProgressHabits };
 	},
 });

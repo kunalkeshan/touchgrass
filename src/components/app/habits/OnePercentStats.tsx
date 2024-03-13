@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { DataModel } from '../../../convex/_generated/dataModel';
+import { DataModel } from '../../../../convex/_generated/dataModel';
 import {
 	AreaChart,
 	Area,
