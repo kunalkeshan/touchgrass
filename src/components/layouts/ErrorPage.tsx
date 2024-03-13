@@ -36,7 +36,10 @@ export default function ErrorPage() {
 	];
 
 	return (
-		<div id='error-page' className='w-full min-h-screen p-4 md:p-16'>
+		<div
+			id='error-page'
+			className='w-full min-h-screen p-4 md:p-16 bg-[url(/images/bg-lines.png)]'
+		>
 			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto text-center'>
 				<h1 className='text-xl lg:text-3xl font-semibold'>Oops!</h1>
 				<p className='text-slate-300'>
@@ -69,12 +72,15 @@ export default function ErrorPage() {
 						</li>
 					))}
 				</ul>
-				<p className='mt-8'>
+				<p className='mt-8 text-lg lg:text-2xl'>
 					In a forgiving mood? Let them all keep their jobs.
 				</p>
-				<p className='mt-4'>
+				<p className='mt-4 text-lg lg:text-2xl'>
 					Return to the{' '}
-					<Link to={'/'} className='underline'>
+					<Link
+						to={'/'}
+						className='underline text-green-500 hover:text-opacity-80 transition-all duration-300'
+					>
 						homepage
 					</Link>
 					.
