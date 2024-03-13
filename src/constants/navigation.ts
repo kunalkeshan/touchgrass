@@ -25,6 +25,11 @@ const COMMON_NAVIGATION: NavigationType[] = [
 		url: '/#features',
 		target: '_self',
 	},
+	{
+		name: 'Guides',
+		url: '/guides',
+		target: '_self',
+	},
 ];
 
 export const NAVBAR_NAVIGATION: NavigationType[] = [...COMMON_NAVIGATION];

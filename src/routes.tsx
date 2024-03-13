@@ -3,6 +3,8 @@ import { createBrowserRouter } from 'react-router-dom';
 // Static Pages
 import Static from './pages/static/App';
 import Landing from './pages/static/Landing';
+import Guides from './pages/static/Guides';
+import IndividualGuide from './pages/static/IndividualGuide';
 
 // App Pages
 import App from './pages/app/App';
@@ -15,6 +17,10 @@ import Profile from './pages/app/Profile';
 // Others
 import ErrorPage from './components/layouts/ErrorPage';
 
+// Loaders
+import { loader as guidesLoader } from './pages/static/Guides';
+import { loader as individualGuideLoader } from './pages/static/IndividualGuide';
+
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 	{
 		path: '/',
@@ -23,6 +29,16 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 			{
 				index: true,
 				element: <Landing />,
+			},
+			{
+				path: 'guides',
+				element: <Guides />,
+				loader: guidesLoader,
+			},
+			{
+				path: 'guides/:guideURL',
+				element: <IndividualGuide />,
+				loader: individualGuideLoader,
 			},
 		],
 		errorElement: <ErrorPage />,
