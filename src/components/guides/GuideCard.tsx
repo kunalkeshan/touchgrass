@@ -10,7 +10,7 @@ const GuideCard: React.FC<Props> = ({ guide }) => {
 	return (
 		<Link
 			to={`/guides/${guide.url}`}
-			className='inline-flex flex-col justify-between w-full h-full group p-4 backdrop-blur-lg bg-white bg-opacity-[0.01] rounded-lg'
+			className='inline-flex flex-col justify-between w-full h-full group p-4 backdrop-blur-lg bg-white bg-opacity-[0.01] rounded-lg hover:shadow-white/20 hover:shadow-sm transition-all duration-300'
 		>
 			<div className='mx-auto'>
 				<img
