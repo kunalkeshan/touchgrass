@@ -20,7 +20,7 @@ type Props = {
 const OnePercentStats: React.FC<Props> = ({ data }) => {
 	const chartData = useMemo(() => {
 		let [daysShowedUp, daysMissed] = [0, 0];
-		return data.entries.map((entry) => {
+		return data.entries?.map((entry) => {
 			if (entry.value === 'A') daysMissed++;
 			else if (entry.value === 'P') daysShowedUp++;
 			return {
@@ -31,8 +31,8 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 	}, [data]);
 
 	const avergeProgress =
-		chartData.reduce((acc, curr) => acc + curr.progress, 0) /
-		chartData.length;
+		chartData?.reduce((acc, curr) => acc + curr.progress, 0) /
+		chartData?.length;
 
 	return (
 		<section className='border border-white rounded-xl p-6 mt-8'>
@@ -41,7 +41,7 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 			</h2>
 			<p className='text-slate-300'>
 				Here's an overview of your 1% progress on this habit ever since
-				you started on {data.entries[0].date}.
+				you started on {data.entries ? data.entries[0].date : null}.
 			</p>
 			<ResponsiveContainer width='100%' height={300} className={'mt-8'}>
 				<AreaChart height={300} data={chartData}>

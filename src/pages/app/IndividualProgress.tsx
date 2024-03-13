@@ -60,14 +60,18 @@ const IndividualProgress = () => {
 							Go back
 						</Link>
 					</section>
-					<ContributionsGraph
-						data={data}
-						key={`contributing-graph-individual-${data._id}`}
-					/>
-					<OnePercentStats
-						data={data}
-						key={`one-percent-stats-individual-${data._id}`}
-					/>
+					{data ? (
+						<ContributionsGraph
+							data={data}
+							key={`contributing-graph-individual-${data._id}`}
+						/>
+					) : null}
+					{data ? (
+						<OnePercentStats
+							data={data}
+							key={`one-percent-stats-individual-${data._id}`}
+						/>
+					) : null}
 				</div>
 			) : null}
 		</div>

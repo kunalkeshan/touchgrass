@@ -15,7 +15,7 @@ type Props = {
 const ContributionsGraph: React.FC<Props> = ({ data }) => {
 	// State to store recorded days
 	const [recordedDays] = useState<string[]>(
-		data.entries.map((entry) => entry.date)
+		data.entries?.map((entry) => entry.date)
 	);
 
 	// Logic to generate the array of day grids
@@ -27,8 +27,8 @@ const ContributionsGraph: React.FC<Props> = ({ data }) => {
 			const formattedDate = currentDate.toISOString().split('T')[0];
 
 			// Check if the formatted date is in the recordedDays array
-			const isActive = recordedDays.includes(formattedDate);
-			const entry = data.entries.find(
+			const isActive = recordedDays?.includes(formattedDate);
+			const entry = data.entries?.find(
 				(entry) => entry.date === formattedDate
 			);
 
@@ -63,7 +63,7 @@ const ContributionsGraph: React.FC<Props> = ({ data }) => {
 			</h2>
 			<p className='text-slate-300'>
 				Here's an overview of your daily activity on this habit starting
-				from {recordedDays[0]} for 365 days.
+				from {recordedDays ? recordedDays[0] : null} for 365 days.
 			</p>
 			<div className='days mt-3'>{generateDayGrids()}</div>
 			<hr className='my-4' />

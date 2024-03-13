@@ -32,7 +32,14 @@ const AllHabits = () => {
 				navigate('/');
 				return;
 			}
-			const today = new Date().toISOString().split('T')[0];
+			const localeDateStringParts = new Date()
+				.toLocaleDateString()
+				.split('/');
+			const today = `${localeDateStringParts[2]}-${
+				parseInt(localeDateStringParts[0], 10) <= 9
+					? `0${localeDateStringParts[0]}`
+					: localeDateStringParts[0]
+			}-${localeDateStringParts[1]}`;
 			const userId = await storeUser();
 			const habits = await getHabits({ userId, date: today });
 			return habits;
@@ -92,11 +99,25 @@ const AllHabits = () => {
 
 	return (
 		<div>
-			<h1 className='text-xl lg:text-3xl font-semibold'>All Habits</h1>
-			<p className='text-slate-300'>
-				Here's an overview of all your habits. You can see your progress
-				here.
-			</p>
+			<section className='flex items-center flex-wrap justify-between'>
+				<div>
+					<h1 className='text-xl lg:text-3xl font-semibold'>
+						All Habits
+					</h1>
+					<p className='text-slate-300'>
+						Here's an overview of all your habits. You can see your
+						progress here.
+					</p>
+				</div>
+				<p className='flex flex-col'>
+					<span className='text-slate-300 text-sm lg:text-base'>
+						Today is
+					</span>
+					<span className='text-lg lg:text-2xl font-medium'>
+						{new Date().toDateString()}
+					</span>
+				</p>
+			</section>
 			{loading ? <Loader /> : null}
 			{isError ? <p>Something went wrong...</p> : null}
 			{data ? (
