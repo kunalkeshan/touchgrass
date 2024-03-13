@@ -60,13 +60,8 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 			<p className='text-slate-300 text-sm'>
 				Understanding this 1% progress graph:
 			</p>
-			<Link
-				to='https://jamesclear.com/continuous-improvement'
-				target='_blank'
-				className='text-sm underline'
-			>
-				Continuous Improvement: How It Works and How to Master It by
-				James Clear
+			<Link to='/guides/continuous-growth' className='text-sm underline'>
+				Continuous Improvement: How It Works and How to Master It.
 			</Link>
 		</section>
 	);

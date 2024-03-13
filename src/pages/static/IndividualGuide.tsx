@@ -78,7 +78,7 @@ const IndividualGuide = () => {
 								</h4>
 							),
 							img: ({ children, ...props }) => (
-								<div className='rounded-xl w-[80%] overflow-hidden mx-auto'>
+								<div className='rounded-xl w-full lg:w-[80%] 2xl:w-[60%] overflow-hidden mx-auto'>
 									<img
 										className='w-full h-auto object-contain'
 										loading='lazy'
@@ -89,9 +89,20 @@ const IndividualGuide = () => {
 								</div>
 							),
 							ol: ({ children, ...props }) => (
-								<ol className='mt-4 [&>*]:mt-4' {...props}>
+								<ol
+									className='mt-4 [&>*]:mt-4 list-decimal'
+									{...props}
+								>
 									{children}
 								</ol>
+							),
+							ul: ({ children, ...props }) => (
+								<ul
+									className='mt-4 [&>*]:mt-4 list-disc'
+									{...props}
+								>
+									{children}
+								</ul>
 							),
 							li: ({ children, ...props }) => (
 								<li className='ml-4' {...props}>

@@ -18,6 +18,7 @@ import Profile from './pages/app/Profile';
 import ErrorPage from './components/layouts/ErrorPage';
 
 // Loaders
+import { loader as rootLoader } from './pages/static/Landing';
 import { loader as guidesLoader } from './pages/static/Guides';
 import { loader as individualGuideLoader } from './pages/static/IndividualGuide';
 
@@ -29,6 +30,7 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 			{
 				index: true,
 				element: <Landing />,
+				loader: rootLoader,
 			},
 			{
 				path: 'guides',

@@ -18,7 +18,7 @@ So often we convince ourselves that change is only meaningful if there is some l
 
 Meanwhile, improving by just 1 percent isn’t notable (and sometimes it isn’t even noticeable). But it can be just as meaningful, especially in the long run.
 
-![tiny-gains-graph-700x700](https://github.com/kunalkeshan/touchgrass/assets/68579547/93528a8b-0389-4304-a965-02701b8681e1)
+![tiny-gains-graph-700x700](/images/guides/tiny-gains-graph-700x700.jpg)
 
 In the beginning, there is basically no difference between making a choice that is 1 percent better or 1 percent worse. (In other words, it won’t impact you very much today.) But as time goes on, these small improvements or declines compound and you suddenly find a very big gap between people who make slightly better decisions on a daily basis and those who don’t.
 
@@ -48,11 +48,11 @@ This is a concept called improvement by subtraction, which is focused on doing l
 
 Here are some examples:
 
-- Education: Avoid stupid mistakes, make fewer mental errors.
-- Investing: Never lose money, limit your risk.
-- Web Design: Remove the on-page elements that distract visitors.
-- Exercise: Miss fewer workouts.
-- Nutrition: Eat fewer unhealthy foods.
+-   Education: Avoid stupid mistakes, make fewer mental errors.
+-   Investing: Never lose money, limit your risk.
+-   Web Design: Remove the on-page elements that distract visitors.
+-   Exercise: Miss fewer workouts.
+-   Nutrition: Eat fewer unhealthy foods.
 
 In the real world, it is often easier to improve your performance by cutting the downside rather than capturing the upside. Subtraction is more practical than addition.
 
@@ -68,9 +68,9 @@ Measuring backward means you make decisions based on what has already happened, 
 
 Here are a few examples:
 
-- **Weight Loss**: Measure your calorie intake. Did you eat 3,500 calories per day last week? Focus on averaging 3,400 per day this week.
-- **Strength Training**: Oh, you squatted 250 pounds for 5 sets of 5 reps last week? Give 255 pounds a try this week.
-- **Relationships**: How many new people did you meet last week? Zero? Focus on introducing yourself to one new person this week.
-- **Entrepreneurship**: You only landed two clients last week while your average is five? It sounds like you should be focused on making more sales calls this week.
+-   **Weight Loss**: Measure your calorie intake. Did you eat 3,500 calories per day last week? Focus on averaging 3,400 per day this week.
+-   **Strength Training**: Oh, you squatted 250 pounds for 5 sets of 5 reps last week? Give 255 pounds a try this week.
+-   **Relationships**: How many new people did you meet last week? Zero? Focus on introducing yourself to one new person this week.
+-   **Entrepreneurship**: You only landed two clients last week while your average is five? It sounds like you should be focused on making more sales calls this week.
 
 Measure backward and then get a little bit better. What did you do last week? How can you improve by just a little bit this week?

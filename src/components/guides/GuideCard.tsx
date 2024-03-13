@@ -10,7 +10,7 @@ const GuideCard: React.FC<Props> = ({ guide }) => {
 	return (
 		<Link
 			to={guide.url}
-			className='inline-block w-full h-full group p-4 backdrop-blur-lg bg-white bg-opacity-[0.01] rounded-lg'
+			className='inline-flex flex-col w-full h-full group p-4 backdrop-blur-lg bg-white bg-opacity-[0.01] rounded-lg'
 		>
 			<div className='mx-auto'>
 				<img
@@ -27,7 +27,7 @@ const GuideCard: React.FC<Props> = ({ guide }) => {
 					{guide.description.slice(0, 72) + '...'}
 				</p>
 			</div>
-			<div className='mt-4 text-sm flex items-center justify-between'>
+			<div className='mt-auto text-sm flex items-center justify-between'>
 				<p className=''>{new Date(guide.published).toDateString()}</p>
 				<p className='underline text-green-500'>Read more</p>
 			</div>
