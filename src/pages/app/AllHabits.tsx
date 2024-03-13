@@ -32,8 +32,9 @@ const AllHabits = () => {
 				navigate('/');
 				return;
 			}
+			const today = new Date().toISOString().split('T')[0];
 			const userId = await storeUser();
-			const habits = await getHabits({ userId });
+			const habits = await getHabits({ userId, date: today });
 			return habits;
 		},
 	});

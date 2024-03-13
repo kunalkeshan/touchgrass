@@ -2,7 +2,7 @@ import { mutation } from './_generated/server';
 import { v } from 'convex/values';
 
 export const getHabits = mutation({
-	args: { userId: v.id('users') },
+	args: { userId: v.id('users'), date: v.string() },
 	handler: async (ctx, args) => {
 		const allhabits = await ctx.db
 			.query('habits')
@@ -10,20 +10,20 @@ export const getHabits = mutation({
 			.collect();
 		const habits = await Promise.all(
 			allhabits.map(async (habit) => {
-				const today = new Date().toISOString().split('T')[0];
 				let entry = await ctx.db
 					.query('entries')
 					.filter((q) =>
 						q.and(
 							q.eq(q.field('habitId'), habit._id),
-							q.eq(q.field('date'), today)
+							q.eq(q.field('date'), args.date)
 						)
 					)
 					.unique();
+				console.log(entry);
 				if (!entry) {
 					await ctx.db.insert('entries', {
 						habitId: habit._id,
-						date: today,
+						date: args.date,
 						value: 'N',
 					});
 				}
@@ -32,7 +32,7 @@ export const getHabits = mutation({
 					.filter((q) =>
 						q.and(
 							q.eq(q.field('habitId'), habit._id),
-							q.eq(q.field('date'), today)
+							q.eq(q.field('date'), args.date)
 						)
 					)
 					.unique();
