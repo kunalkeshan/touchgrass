@@ -18,7 +18,7 @@ So often we convince ourselves that change is only meaningful if there is some l
 
 Meanwhile, improving by just 1 percent isn’t notable (and sometimes it isn’t even noticeable). But it can be just as meaningful, especially in the long run.
 
-< image here>
+![tiny-gains-graph-700x700](https://github.com/kunalkeshan/touchgrass/assets/68579547/93528a8b-0389-4304-a965-02701b8681e1)
 
 In the beginning, there is basically no difference between making a choice that is 1 percent better or 1 percent worse. (In other words, it won’t impact you very much today.) But as time goes on, these small improvements or declines compound and you suddenly find a very big gap between people who make slightly better decisions on a daily basis and those who don’t.
 
