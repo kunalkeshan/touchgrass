@@ -39,3 +39,11 @@ body {
 .day--no-data {
 	background-color: #808080;
 }
+
+.overall-progress-tooltip > ul li:not(:nth-child(1)) {
+	display: none !important;
+}
+
+.overall-progress-tooltip > ul li:nth-child(1) {
+	color: #000000 !important;
+}

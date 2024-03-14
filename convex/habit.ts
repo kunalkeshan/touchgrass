@@ -77,10 +77,10 @@ export const getHabitAndEntries = mutation({
 			progress = 1.01 ** (daysShowedUp - daysMissed);
 			return { ...entry, progress };
 		});
-		const avergeProgress =
+		const averageProgress =
 			entries?.reduce((acc, curr) => acc + curr.progress, 0) /
 			entries?.length;
-		return { ...habit, entries, avergeProgress };
+		return { ...habit, entries, averageProgress };
 	},
 });
 

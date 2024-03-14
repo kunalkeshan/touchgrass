@@ -10,7 +10,11 @@ import {
 } from 'recharts';
 import { DataModel } from '../../../../convex/_generated/dataModel';
 import { Link } from 'react-router-dom';
-import { randomColor } from '@/lib/utils';
+import {
+	dateFormatterAfterISOParse,
+	parseISOString,
+	randomColor,
+} from '@/lib/utils';
 import { badgeVariants } from '@/components/ui/badge';
 
 export type OverallProgressGraphProps = React.ComponentProps<'section'> & {
@@ -34,6 +38,14 @@ const OverallProgressGraph: React.FC<OverallProgressGraphProps> = ({
 	onePercentProgressHabits,
 }) => {
 	const [selectedHabit, setSelectedHabit] = useState(habits[0]._id);
+
+	const chartData = onePercentProgressHabits.map((entry) => {
+		return {
+			...entry,
+			date: dateFormatterAfterISOParse(parseISOString(entry.date)),
+		};
+	});
+
 	return (
 		<section>
 			<div className='border border-white rounded-xl p-6 mt-8'>
@@ -73,8 +85,8 @@ const OverallProgressGraph: React.FC<OverallProgressGraphProps> = ({
 					height={300}
 					className={'mt-8'}
 				>
-					<AreaChart height={300} data={onePercentProgressHabits}>
-						{onePercentProgressHabits
+					<AreaChart height={300} data={chartData}>
+						{chartData
 							.filter((e) => e.habitId === selectedHabit)
 							.map((entry, index) => {
 								const color = randomColor();
@@ -84,6 +96,7 @@ const OverallProgressGraph: React.FC<OverallProgressGraphProps> = ({
 										dataKey={entry.habitName}
 										key={`overprogress-${entry._id}-area-${index}`}
 										stroke={color + '40'}
+										fill={color + '40'}
 										fillOpacity={0.2}
 										dot={true}
 										name={entry.habitName}
@@ -92,7 +105,10 @@ const OverallProgressGraph: React.FC<OverallProgressGraphProps> = ({
 							})}
 						<XAxis dataKey='date' allowDuplicatedCategory={false} />
 						<YAxis />
-						<Tooltip labelClassName='text-black' />
+						<Tooltip
+							labelClassName='text-black'
+							wrapperClassName='overall-progress-tooltip'
+						/>
 						<ReferenceLine
 							y={1}
 							stroke='green'

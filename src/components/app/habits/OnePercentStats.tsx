@@ -44,13 +44,12 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 						type='monotone'
 						dataKey='progress'
 						stroke={
-							data.averageProgress >= 1 ? '#00ff00' : '#ff0000'
+							data.averageProgress >= 1.0 ? '#00ff00' : '#ff0000'
 						}
 						fill={
-							data.averageProgress >= 1
-								? '#00ff0040'
-								: '#ff000040'
+							data.averageProgress >= 1.0 ? '#00ff00' : '#ff0000'
 						}
+						fillOpacity={0.2}
 						dot={true}
 					/>
 					<XAxis dataKey='date' />
