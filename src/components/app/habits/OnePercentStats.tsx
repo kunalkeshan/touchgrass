@@ -14,26 +14,20 @@ import { dateFormatterAfterISOParse, parseISOString } from '@/lib/utils';
 
 type Props = {
 	data: DataModel['habits']['document'] & {
-		entries: DataModel['entries']['document'][];
+		entries: Array<DataModel['entries']['document'] & { progress: number }>;
+		averageProgress: number;
 	};
 };
 
 const OnePercentStats: React.FC<Props> = ({ data }) => {
 	const chartData = useMemo(() => {
-		let [daysShowedUp, daysMissed] = [0, 0];
 		return data.entries?.map((entry) => {
-			if (entry.value === 'A') daysMissed++;
-			else if (entry.value === 'P') daysShowedUp++;
 			return {
+				...entry,
 				date: dateFormatterAfterISOParse(parseISOString(entry.date)),
-				progress: 1.01 ** (daysShowedUp - daysMissed),
 			};
 		});
 	}, [data]);
-
-	const avergeProgress =
-		chartData?.reduce((acc, curr) => acc + curr.progress, 0) /
-		chartData?.length;
 
 	return (
 		<section className='border border-white rounded-xl p-6 mt-8'>
@@ -49,8 +43,14 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 					<Area
 						type='monotone'
 						dataKey='progress'
-						stroke={avergeProgress >= 1 ? '#00ff00' : '#ff0000'}
-						fill={avergeProgress >= 1 ? '#00ff0040' : '#ff000040'}
+						stroke={
+							data.averageProgress >= 1 ? '#00ff00' : '#ff0000'
+						}
+						fill={
+							data.averageProgress >= 1
+								? '#00ff0040'
+								: '#ff000040'
+						}
 						dot={true}
 					/>
 					<XAxis dataKey='date' />

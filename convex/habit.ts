@@ -65,12 +65,22 @@ export const getHabitAndEntries = mutation({
 		if (!habit) {
 			throw new Error('Habit not found');
 		}
-		const entries = await ctx.db
+		const allEntries = await ctx.db
 			.query('entries')
 			.order('asc')
 			.filter((q) => q.eq(q.field('habitId'), args.habitId))
 			.collect();
-		return { ...habit, entries };
+		let [daysShowedUp, daysMissed, progress] = [0, 0, 1];
+		const entries = allEntries.map((entry) => {
+			if (entry.value === 'A') daysMissed++;
+			else if (entry.value === 'P') daysShowedUp++;
+			progress = 1.01 ** (daysShowedUp - daysMissed);
+			return { ...entry, progress };
+		});
+		const avergeProgress =
+			entries?.reduce((acc, curr) => acc + curr.progress, 0) /
+			entries?.length;
+		return { ...habit, entries, avergeProgress };
 	},
 });
 
