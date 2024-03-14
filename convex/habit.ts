@@ -8,6 +8,13 @@ function parseISOString(s: string) {
 	return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
 }
 
+const sortByDate = (order: 'asc' | 'desc') => (a: string, b: string) => {
+	const dateA = parseISOString(a);
+	const dateB = parseISOString(b);
+	if (order === 'asc') return dateA.getTime() - dateB.getTime();
+	else return dateB.getTime() - dateA.getTime();
+};
+
 export const getHabits = mutation({
 	args: { userId: v.id('users'), date: v.string() },
 	handler: async (ctx, args) => {
@@ -80,9 +87,9 @@ export const getHabitAndEntries = mutation({
 		}
 		const allEntries = await ctx.db
 			.query('entries')
-			.order('asc')
 			.filter((q) => q.eq(q.field('habitId'), args.habitId))
 			.collect();
+		allEntries.sort((a, b) => sortByDate('asc')(a.date, b.date));
 		let [daysShowedUp, daysMissed, progress] = [0, 0, 1];
 		const entries = allEntries.map((entry) => {
 			if (entry.value === 'A') daysMissed++;
@@ -109,9 +116,9 @@ export const getOverallHabitStats = mutation({
 			allHabits.map(async (habit) => {
 				const entries = await ctx.db
 					.query('entries')
-					.order('asc')
 					.filter((q) => q.eq(q.field('habitId'), habit._id))
 					.collect();
+				entries.sort((a, b) => sortByDate('asc')(a.date, b.date));
 				return { ...habit, entries };
 			})
 		);
