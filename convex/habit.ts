@@ -70,9 +70,10 @@ export const createHabit = mutation({
 			name: args.name,
 			userId: args.userId,
 		});
+		const date = new Date().toISOString().split('T')[0];
 		return await ctx.db.insert('entries', {
 			habitId,
-			date: new Date().toISOString().split('T')[0],
+			date,
 			value: 'N',
 		});
 	},

@@ -51,7 +51,7 @@ const NewHabit = () => {
 			}
 			const userId = await storeUser();
 			await createHabit({ ...values, userId });
-			queryClient.fetchQuery(['all-habits']);
+			queryClient.refetchQueries(['all-habits'], { active: true });
 			toast.success('Habit created!');
 			form.reset();
 			navigate('/app');
