@@ -17,12 +17,21 @@ type DatePickerProps = React.ComponentProps<'div'> & {
 
 export function DatePicker({ date, setDate }: DatePickerProps) {
 	const { user } = useUser();
+	const [open, setOpen] = React.useState(false);
 
 	const tomorrow = new Date(); // initially set to today
 	tomorrow.setDate(tomorrow.getDate() + 1); // set to tomorrow
 
+	const handleToggle = (state: boolean) => {
+		setOpen(state);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	return (
-		<Popover>
+		<Popover open={open} onOpenChange={handleToggle}>
 			<PopoverTrigger asChild>
 				<Button
 					variant={'outline'}
@@ -43,7 +52,14 @@ export function DatePicker({ date, setDate }: DatePickerProps) {
 				<Calendar
 					mode='single'
 					selected={date}
-					onSelect={(day) => setDate(day as Date)}
+					onSelect={(day) => {
+						handleClose();
+						if (!day) {
+							setDate(new Date());
+							return;
+						}
+						setDate(day);
+					}}
 					initialFocus
 					fromDate={new Date(user?.createdAt ?? new Date())}
 					toDate={tomorrow}

@@ -30,7 +30,7 @@ const AllHabits = () => {
 	} = useQuery({
 		queryKey: [
 			'all-habits',
-			`user-selected-date-all-habit-${userSelectedDate.toISOString()}`,
+			`user-selected-date-all-habit-${userSelectedDate}`,
 		],
 		queryFn: async () => {
 			if (isLoading) return;
