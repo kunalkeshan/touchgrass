@@ -35,11 +35,12 @@ const AllHabits = () => {
 			const localeDateStringParts = new Date()
 				.toLocaleDateString()
 				.split('/');
+			// dd/mm/yyyy -> yyyy-mm-dd
 			const today = `${localeDateStringParts[2]}-${
-				parseInt(localeDateStringParts[0], 10) <= 9
-					? `0${localeDateStringParts[0]}`
-					: localeDateStringParts[0]
-			}-${localeDateStringParts[1]}`;
+				parseInt(localeDateStringParts[1], 10) <= 9
+					? `0${localeDateStringParts[1]}`
+					: localeDateStringParts[1]
+			}-${localeDateStringParts[0]}`;
 			const userId = await storeUser();
 			const habits = await getHabits({ userId, date: today });
 			return habits;

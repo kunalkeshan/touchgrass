@@ -2,6 +2,12 @@ import { DataModel } from './_generated/dataModel';
 import { mutation } from './_generated/server';
 import { v } from 'convex/values';
 
+function parseISOString(s: string) {
+	const dateString = `${s}T00:00:00.000Z`;
+	const b = dateString.split(/\D+/).map((n) => parseInt(n, 10));
+	return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+}
+
 export const getHabits = mutation({
 	args: { userId: v.id('users'), date: v.string() },
 	handler: async (ctx, args) => {
@@ -10,34 +16,41 @@ export const getHabits = mutation({
 			.filter((q) => q.eq(q.field('userId'), args.userId))
 			.collect();
 		const habits = await Promise.all(
-			allhabits.map(async (habit) => {
-				let entry = await ctx.db
-					.query('entries')
-					.filter((q) =>
-						q.and(
-							q.eq(q.field('habitId'), habit._id),
-							q.eq(q.field('date'), args.date)
+			allhabits
+				.filter((habit) => {
+					const userSelectedDate = parseISOString(args.date);
+					const habitCreatedDate = new Date(habit._creationTime);
+					habitCreatedDate.setHours(0, 0, 0, 0);
+					return userSelectedDate >= habitCreatedDate;
+				})
+				.map(async (habit) => {
+					let entry = await ctx.db
+						.query('entries')
+						.filter((q) =>
+							q.and(
+								q.eq(q.field('habitId'), habit._id),
+								q.eq(q.field('date'), args.date)
+							)
 						)
-					)
-					.unique();
-				if (!entry) {
-					await ctx.db.insert('entries', {
-						habitId: habit._id,
-						date: args.date,
-						value: 'N',
-					});
-				}
-				entry = await ctx.db
-					.query('entries')
-					.filter((q) =>
-						q.and(
-							q.eq(q.field('habitId'), habit._id),
-							q.eq(q.field('date'), args.date)
+						.unique();
+					if (!entry) {
+						await ctx.db.insert('entries', {
+							habitId: habit._id,
+							date: args.date,
+							value: 'N',
+						});
+					}
+					entry = await ctx.db
+						.query('entries')
+						.filter((q) =>
+							q.and(
+								q.eq(q.field('habitId'), habit._id),
+								q.eq(q.field('date'), args.date)
+							)
 						)
-					)
-					.unique();
-				return { habitId: habit._id, habit, entry: entry! };
-			})
+						.unique();
+					return { habitId: habit._id, habit, entry: entry! };
+				})
 		);
 		return habits;
 	},
