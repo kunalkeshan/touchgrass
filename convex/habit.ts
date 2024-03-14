@@ -67,7 +67,7 @@ export const getHabitAndEntries = mutation({
 		}
 		const entries = await ctx.db
 			.query('entries')
-			.order('desc')
+			.order('asc')
 			.filter((q) => q.eq(q.field('habitId'), args.habitId))
 			.collect();
 		return { ...habit, entries };
@@ -86,7 +86,7 @@ export const getOverallHabitStats = mutation({
 			allHabits.map(async (habit) => {
 				const entries = await ctx.db
 					.query('entries')
-					.order('desc')
+					.order('asc')
 					.filter((q) => q.eq(q.field('habitId'), habit._id))
 					.collect();
 				return { ...habit, entries };

@@ -10,6 +10,7 @@ import {
 	ReferenceLine,
 } from 'recharts';
 import { Link } from 'react-router-dom';
+import { dateFormatterAfterISOParse, parseISOString } from '@/lib/utils';
 
 type Props = {
 	data: DataModel['habits']['document'] & {
@@ -24,7 +25,7 @@ const OnePercentStats: React.FC<Props> = ({ data }) => {
 			if (entry.value === 'A') daysMissed++;
 			else if (entry.value === 'P') daysShowedUp++;
 			return {
-				date: entry.date,
+				date: dateFormatterAfterISOParse(parseISOString(entry.date)),
 				progress: 1.01 ** (daysShowedUp - daysMissed),
 			};
 		});

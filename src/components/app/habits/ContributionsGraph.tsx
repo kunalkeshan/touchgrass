@@ -15,7 +15,7 @@ type Props = {
 const ContributionsGraph: React.FC<Props> = ({ data }) => {
 	// State to store recorded days
 	const [recordedDays] = useState<string[]>(
-		data.entries?.map((entry) => entry.date)
+		data.entries?.reverse()?.map((entry) => entry.date)
 	);
 
 	// Logic to generate the array of day grids
