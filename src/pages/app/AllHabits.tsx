@@ -3,9 +3,10 @@ import { useConvexAuth, useMutation } from 'convex/react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import HabitCard from '@/components/app/habits/HabitCard';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { DataModel } from '../../../convex/_generated/dataModel';
 import Loader from '@/components/layouts/Loader';
+import { DatePicker } from '@/components/app/DatePicker';
 
 type CombinedHabits = {
 	habit: DataModel['habits']['document'];
@@ -19,20 +20,25 @@ const AllHabits = () => {
 	const getHabits = useMutation(api.habit.getHabits);
 	const storeUser = useMutation(api.user.storeUser);
 
+	const [userSelectedDate, setUserSelectedDate] = useState(new Date());
+
 	const {
 		data,
 		isLoading: loading,
 		isError,
 		refetch,
 	} = useQuery({
-		queryKey: ['all-habits'],
+		queryKey: [
+			'all-habits',
+			`user-selected-date-all-habit-${userSelectedDate.toISOString()}`,
+		],
 		queryFn: async () => {
 			if (isLoading) return;
 			if (!isAuthenticated) {
 				navigate('/');
 				return;
 			}
-			const localeDateStringParts = new Date()
+			const localeDateStringParts = userSelectedDate
 				.toLocaleDateString()
 				.split('/');
 			// dd/mm/yyyy -> yyyy-mm-dd
@@ -107,7 +113,7 @@ const AllHabits = () => {
 
 	return (
 		<div>
-			<section className='flex items-center flex-wrap justify-between'>
+			<section className='flex flex-wrap justify-between'>
 				<div>
 					<h1 className='text-xl lg:text-3xl font-semibold'>
 						All Habits
@@ -117,14 +123,18 @@ const AllHabits = () => {
 						progress here.
 					</p>
 				</div>
-				<p className='flex flex-col'>
+				<div className='flex flex-col'>
 					<span className='text-slate-300 text-sm lg:text-base'>
 						Today is
 					</span>
 					<span className='text-lg lg:text-2xl font-medium'>
 						{new Date().toDateString()}
 					</span>
-				</p>
+					<DatePicker
+						date={userSelectedDate}
+						setDate={setUserSelectedDate}
+					/>
+				</div>
 			</section>
 			{loading ? <Loader /> : null}
 			{isError ? <p>Something went wrong...</p> : null}
