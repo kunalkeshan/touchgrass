@@ -1,18 +1,20 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter } from 'react-router-dom';
+import { lazy } from 'react';
 
 // Static Pages
 import Static from './pages/static/App';
-import Landing from './pages/static/Landing';
-import Guides from './pages/static/Guides';
-import IndividualGuide from './pages/static/IndividualGuide';
+const Landing = lazy(() => import('./pages/static/Landing'));
+const Guides = lazy(() => import('./pages/static/Guides'));
+const IndividualGuide = lazy(() => import('./pages/static/IndividualGuide'));
 
 // App Pages
 import App from './pages/app/App';
-import AllHabits from './pages/app/AllHabits';
-import NewHabit from './pages/app/NewHabit';
-import IndividualProgress from './pages/app/IndividualProgress';
-import OverallProgress from './pages/app/OverallProgress';
-import Profile from './pages/app/Profile';
+const AllHabits = lazy(() => import('./pages/app/AllHabits'));
+const NewHabit = lazy(() => import('./pages/app/NewHabit'));
+const IndividualProgress = lazy(() => import('./pages/app/IndividualProgress'));
+const OverallProgress = lazy(() => import('./pages/app/OverallProgress'));
+const Profile = lazy(() => import('./pages/app/Profile'));
 
 // Others
 import ErrorPage from './components/layouts/ErrorPage';

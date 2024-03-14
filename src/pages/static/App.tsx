@@ -1,6 +1,7 @@
 import Navbar from '../../components/layouts/Navbar';
 import Footer from '../../components/layouts/Footer';
 import Loader from '../../components/layouts/Loader';
+import { Suspense } from 'react';
 import { Outlet, useNavigation } from 'react-router-dom';
 import useStoreUserEffect from '@/hooks/useStoreUserEffect';
 import ScrollToHashElement from '../../components/reusable/ScrollToHashElement';
@@ -12,7 +13,13 @@ const App = () => {
 	return (
 		<div>
 			<Navbar />
-			{navigation.state === 'loading' ? <Loader /> : <Outlet />}
+			{navigation.state === 'loading' ? (
+				<Loader />
+			) : (
+				<Suspense fallback={<Loader />}>
+					<Outlet />
+				</Suspense>
+			)}
 			<Footer />
 			<ScrollToHashElement />
 			<ScrollToTop />
