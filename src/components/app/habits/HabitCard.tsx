@@ -33,6 +33,7 @@ import { api } from '../../../../convex/_generated/api';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 import EditHabitDialog from './EditHabitDialog';
+import DeleteHabitDialog from './DeleteHabitDialog';
 
 type Props = React.ComponentProps<typeof Card> & {
 	habit: DataModel['habits']['document'];
@@ -121,6 +122,17 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 								habit={habit}
 								editHabit={editHabit}
 								key={`edit-habit-dialog-${habit._id}`}
+							/>
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							className='p-0 mt-1'
+							onSelect={(e) => e.preventDefault()}
+							onClick={(e) => e.preventDefault()}
+						>
+							<DeleteHabitDialog
+								habit={habit}
+								editHabit={editHabit}
+								key={`delete-habit-dialog-${habit._id}`}
 							/>
 						</DropdownMenuItem>
 					</DropdownMenuContent>

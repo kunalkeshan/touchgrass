@@ -133,3 +133,19 @@ export const updateHabitName = mutation({
 		return await ctx.db.patch(args.habitId, { name: args.name });
 	},
 });
+
+export const deleteHabitAndEntries = mutation({
+	args: { habitId: v.id('habits') },
+	handler: async (ctx, args) => {
+		const entries = await ctx.db
+			.query('entries')
+			.filter((q) => q.eq(q.field('habitId'), args.habitId))
+			.collect();
+		await Promise.all(
+			entries.map(async (entry) => {
+				await ctx.db.delete(entry._id);
+			})
+		);
+		return await ctx.db.delete(args.habitId);
+	},
+});

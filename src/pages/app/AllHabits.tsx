@@ -86,6 +86,13 @@ const AllHabits = () => {
 				refetch();
 				return updatedHabits;
 			}
+			case 'DELETE_HABIT': {
+				const updatedHabits = state.filter(
+					(habit) => habit.habitId !== action.payload.habitId
+				);
+				refetch();
+				return updatedHabits;
+			}
 			default:
 				return state;
 		}
