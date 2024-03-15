@@ -45,7 +45,7 @@ const EditHabitForm: React.FC<Props> = ({ habit, editHabit, close }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			name: habit.name,
+			name: habit?.name || '',
 		},
 	});
 
@@ -90,6 +90,27 @@ const EditHabitForm: React.FC<Props> = ({ habit, editHabit, close }) => {
 									placeholder='Read for 30 minutes'
 									className='text-black'
 									{...field}
+									onKeyDown={(
+										e: React.KeyboardEvent<HTMLInputElement>
+									) => {
+										if (
+											e.code === 'Space' ||
+											e.key === ' '
+										) {
+											e.stopPropagation();
+										} else if (
+											e.code === 'Enter' ||
+											e.key === 'Enter'
+										) {
+											if (formRef.current) {
+												formRef.current.dispatchEvent(
+													new Event('submit', {
+														bubbles: true,
+													})
+												);
+											}
+										}
+									}}
 								/>
 							</FormControl>
 							<FormDescription>
@@ -104,9 +125,7 @@ const EditHabitForm: React.FC<Props> = ({ habit, editHabit, close }) => {
 				<Button
 					type='submit'
 					className={`${submitting ? 'animate-pulse' : ''} w-full`}
-					disabled={
-						form.getValues('name') === habit.name || submitting
-					}
+					disabled={submitting}
 					onClick={() => {
 						if (formRef.current) {
 							formRef.current.dispatchEvent(
