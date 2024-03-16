@@ -38,17 +38,17 @@ const AllHabits = () => {
 				navigate('/');
 				return;
 			}
-			const localeDateStringParts = userSelectedDate
-				.toLocaleDateString()
-				.split('/');
-			// dd/mm/yyyy -> yyyy-mm-dd
-			const today = `${localeDateStringParts[2]}-${
-				parseInt(localeDateStringParts[1], 10) <= 9
-					? `0${localeDateStringParts[1]}`
-					: localeDateStringParts[1]
-			}-${localeDateStringParts[0]}`;
+			const date = [
+				userSelectedDate.getFullYear(),
+				userSelectedDate.getMonth() < 9
+					? `0${userSelectedDate.getMonth() + 1}`
+					: userSelectedDate.getMonth() + 1,
+				userSelectedDate.getDate() < 10
+					? `0${userSelectedDate.getDate()}`
+					: userSelectedDate.getDate(),
+			].join('-') as string;
 			const userId = await storeUser();
-			const habits = await getHabits({ userId, date: today });
+			const habits = await getHabits({ userId, date });
 			return habits;
 		},
 	});
