@@ -33,6 +33,59 @@ const Profile = () => {
 					/>
 				</section>
 			</div>
+			<div className='w-full mt-8'>
+				<h2 className='font-medium text-base lg:text-2xl'>
+					Account Settings
+				</h2>
+				<p>Change your password and other account settings here.</p>
+				<section className='mt-4'>
+					<h3 className='w-full border-b border-b-white text-base lg:text-2xl font-medium'>
+						Miscellaneous
+					</h3>
+					<div className='mt-4 grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-8'>
+						<p>
+							Download your data associated with this account.
+							(Note: Export format is JSON.) Coming soon.
+						</p>
+						<Button
+							variant={'secondary'}
+							className='w-fit'
+							disabled
+						>
+							Export Data
+						</Button>
+					</div>
+				</section>
+				<section className='mt-4'>
+					<h3 className='text-red-500 w-full border-b border-b-red-500 text-base lg:text-2xl font-medium'>
+						Danger Zone
+					</h3>
+					<div className='mt-4 grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-8'>
+						<p>
+							Delete all habits and associated data. This action
+							is irreversible. Coming soon.
+						</p>
+						<Button
+							variant={'destructive'}
+							className='w-fit'
+							disabled
+						>
+							Delete All Habits
+						</Button>
+						<p>
+							Delete your account and all associated data. This
+							action is irreversible. Coming soon.
+						</p>
+						<Button
+							variant={'destructive'}
+							className='w-fit'
+							disabled
+						>
+							Delete Account
+						</Button>
+					</div>
+				</section>
+			</div>
 		</div>
 	);
 };
