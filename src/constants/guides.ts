@@ -14,6 +14,19 @@ export type Guide = Readonly<{
 
 export const GUIDES: Guide[] = [
 	{
+		title: 'Choosing the Right Habit and Getting Started',
+		description:
+			"Whether you're looking to improve your health, productivity, or overall well-being, choosing the right habit is crucial for long-term success.",
+		tags: ['Habits', 'Growth', 'Mindset'],
+		url: 'choosing-habits',
+		image: '/images/guides/choosing-habits.svg',
+		published: new Date('2024-03-16'),
+		author: {
+			name: 'Kunal Keshan',
+			social: 'https://x.com/_kunalkeshan_',
+		},
+	},
+	{
 		title: 'Continuous Improvement: How It Works and How to Master It',
 		description:
 			'Continuous improvement is a dedication to making small changes and improvements every day, with the expectation that those small improvements will add up to something significant.',
