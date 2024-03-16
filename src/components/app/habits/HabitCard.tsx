@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Card,
 	CardDescription,
@@ -46,18 +46,23 @@ type Props = React.ComponentProps<typeof Card> & {
 };
 
 const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
+	const [updating, setUpdating] = useState(false);
+
 	const updateHabitEntry = useMutation(api.entry.updateEntry);
 
 	const handleUpdateHabitEntry =
 		(value: DataModel['entries']['document']['value']) => async () => {
+			setUpdating(true);
 			try {
 				editHabit({
 					type: 'UPDATE_HABIT_ENTRY',
 					payload: { habitId: habit._id, entryValue: value },
 				});
-				updateHabitEntry({ entryId: entry._id, value });
+				await updateHabitEntry({ entryId: entry._id, value });
 			} catch (error) {
 				toast.error('Failed to update habit entry');
+			} finally {
+				setUpdating(false);
 			}
 		};
 
@@ -77,16 +82,19 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 				{entry.value !== 'P' ? (
 					<CheckHabitAsCompleted
 						updateValue={handleUpdateHabitEntry('P')}
+						disabled={updating}
 					/>
 				) : null}
 				{entry.value !== 'A' ? (
 					<CheckHabitAsFailed
 						updateValue={handleUpdateHabitEntry('A')}
+						disabled={updating}
 					/>
 				) : null}
 				{entry.value !== 'N' ? (
 					<CheckHabitAsMissed
 						updateValue={handleUpdateHabitEntry('N')}
+						disabled={updating}
 					/>
 				) : null}
 				<DropdownMenu>
@@ -146,9 +154,13 @@ export default HabitCard;
 
 type CheckHabitComponentProps = {
 	updateValue: () => Promise<void>;
+	disabled: boolean;
 };
 
-const CheckHabitAsCompleted = ({ updateValue }: CheckHabitComponentProps) => {
+const CheckHabitAsCompleted = ({
+	updateValue,
+	disabled,
+}: CheckHabitComponentProps) => {
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
@@ -157,6 +169,7 @@ const CheckHabitAsCompleted = ({ updateValue }: CheckHabitComponentProps) => {
 					className='text-green-500'
 					size={'icon'}
 					onClick={updateValue}
+					disabled={disabled}
 				>
 					<Check className='w-6 h-6' />
 				</Button>
@@ -166,7 +179,10 @@ const CheckHabitAsCompleted = ({ updateValue }: CheckHabitComponentProps) => {
 	);
 };
 
-const CheckHabitAsFailed = ({ updateValue }: CheckHabitComponentProps) => {
+const CheckHabitAsFailed = ({
+	updateValue,
+	disabled,
+}: CheckHabitComponentProps) => {
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
@@ -175,6 +191,7 @@ const CheckHabitAsFailed = ({ updateValue }: CheckHabitComponentProps) => {
 					className='text-red-500'
 					size={'icon'}
 					onClick={updateValue}
+					disabled={disabled}
 				>
 					<CircleX className='w-6 h-6' />
 				</Button>
@@ -184,11 +201,19 @@ const CheckHabitAsFailed = ({ updateValue }: CheckHabitComponentProps) => {
 	);
 };
 
-const CheckHabitAsMissed = ({ updateValue }: CheckHabitComponentProps) => {
+const CheckHabitAsMissed = ({
+	updateValue,
+	disabled,
+}: CheckHabitComponentProps) => {
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
-				<Button variant='secondary' size={'icon'} onClick={updateValue}>
+				<Button
+					variant='secondary'
+					size={'icon'}
+					onClick={updateValue}
+					disabled={disabled}
+				>
 					<RotateCcw className='w-6 h-6' />
 				</Button>
 			</TooltipTrigger>
