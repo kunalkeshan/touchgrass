@@ -12,13 +12,22 @@ import { Input } from '@/components/ui/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useState } from 'react';
 import { RotateCw } from 'lucide-react';
 import { queryClient } from '@/main';
+import { fetchSingleResource } from '@/lib/guides';
+import { Guide } from '@/constants/guides';
+import GuideCard from '@/components/guides/GuideCard';
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function loader() {
+	const guide = await fetchSingleResource('choosing-habits');
+	return { guide };
+}
 
 const formSchema = z.object({
 	name: z
@@ -28,6 +37,8 @@ const formSchema = z.object({
 });
 
 const NewHabit = () => {
+	const { guide } = useLoaderData() as { guide: Guide };
+
 	const navigate = useNavigate();
 	const { isAuthenticated, isLoading } = useConvexAuth();
 	const createHabit = useMutation(api.habit.createHabit);
@@ -117,6 +128,13 @@ const NewHabit = () => {
 					</Button>
 				</form>
 			</Form>
+			<section className='mt-8 grid grid-cols-1 md:grid-cols-2 gap-8'>
+				<h2 className='text-lg lg:text-2xl font-medium'>
+					Unsure what habit to track? Check out our guide on choosing
+					a habit.
+				</h2>
+				<GuideCard guide={guide} />
+			</section>
 		</div>
 	);
 };
