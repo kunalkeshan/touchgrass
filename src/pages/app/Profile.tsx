@@ -37,7 +37,7 @@ const Profile = () => {
 				<h2 className='font-medium text-base lg:text-2xl'>
 					Account Settings
 				</h2>
-				<p>Change your password and other account settings here.</p>
+				<p>Change your account settings here.</p>
 				<section className='mt-4'>
 					<h3 className='w-full border-b border-b-white text-base lg:text-2xl font-medium'>
 						Miscellaneous
