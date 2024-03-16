@@ -72,7 +72,7 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 		<Card
 			className={`${
 				habitEntryToBeDone ? '' : 'opacity-80'
-			} flex items-center justify-between`}
+			} flex items-center justify-between hover:bg-white/10 transition-all duration-300`}
 		>
 			<CardHeader
 				className={`${habitEntryToBeDone ? '' : 'line-through'} flex-1`}

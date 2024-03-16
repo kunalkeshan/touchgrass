@@ -1,6 +1,6 @@
 import { api } from '../../../convex/_generated/api';
 import { useConvexAuth, useMutation } from 'convex/react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import HabitCard from '@/components/app/habits/HabitCard';
 import { useEffect, useReducer, useState } from 'react';
@@ -145,16 +145,38 @@ const AllHabits = () => {
 							Show up!
 						</h2>
 						<div className='mt-4 flex flex-col gap-4'>
-							{habits
-								.filter((h) => h.entry?.value === 'N')
-								.map((habit) => (
-									<HabitCard
-										key={habit.habit._id}
-										habit={habit.habit}
-										entry={habit.entry!}
-										editHabit={setHabits}
-									/>
-								))}
+							{habits.length > 0 ? (
+								habits.filter((h) => h.entry?.value === 'N')
+									.length > 0 ? (
+									habits
+										.filter((h) => h.entry?.value === 'N')
+										.map((habit) => (
+											<HabitCard
+												key={habit.habit._id}
+												habit={habit.habit}
+												entry={habit.entry!}
+												editHabit={setHabits}
+											/>
+										))
+								) : (
+									<p className='text-slate-300'>
+										All habits are up to date. Good job!
+									</p>
+								)
+							) : (
+								<div>
+									<p className='text-lg lg:text-2xl font-medium'>
+										No habits found.{' '}
+										<Link
+											to='/app/new-habit'
+											className='underline text-green-500 hover:text-green-500/80 transition-all duration-300'
+										>
+											Create a habit
+										</Link>{' '}
+										to get started.
+									</p>
+								</div>
+							)}
 						</div>
 					</section>
 					<section>
@@ -162,16 +184,26 @@ const AllHabits = () => {
 							Success
 						</h2>
 						<div className='mt-4 flex flex-col gap-4'>
-							{habits
-								.filter((h) => h.entry?.value === 'P')
-								.map((habit) => (
-									<HabitCard
-										key={habit.habit._id}
-										habit={habit.habit}
-										entry={habit.entry!}
-										editHabit={setHabits}
-									/>
-								))}
+							{habits.length > 0 ? (
+								habits.filter((h) => h.entry?.value === 'P')
+									.length > 0 ? (
+									habits
+										.filter((h) => h.entry?.value === 'P')
+										.map((habit) => (
+											<HabitCard
+												key={habit.habit._id}
+												habit={habit.habit}
+												entry={habit.entry!}
+												editHabit={setHabits}
+											/>
+										))
+								) : (
+									<p className='text-slate-300'>
+										Completed a habit? Mark it as done and
+										it will update here.
+									</p>
+								)
+							) : null}
 						</div>
 					</section>
 					<section>
@@ -179,16 +211,26 @@ const AllHabits = () => {
 							Failed
 						</h2>
 						<div className='mt-4 flex flex-col gap-4'>
-							{habits
-								.filter((h) => h.entry?.value === 'A')
-								.map((habit) => (
-									<HabitCard
-										key={habit.habit._id}
-										habit={habit.habit}
-										entry={habit.entry!}
-										editHabit={setHabits}
-									/>
-								))}
+							{habits.length > 0 ? (
+								habits.filter((h) => h.entry?.value === 'A')
+									.length > 0 ? (
+									habits
+										.filter((h) => h.entry?.value === 'A')
+										.map((habit) => (
+											<HabitCard
+												key={habit.habit._id}
+												habit={habit.habit}
+												entry={habit.entry!}
+												editHabit={setHabits}
+											/>
+										))
+								) : (
+									<p className='text-slate-300'>
+										Failed a habit? Mark it as failed and it
+										will update here.
+									</p>
+								)
+							) : null}
 						</div>
 					</section>
 				</div>
