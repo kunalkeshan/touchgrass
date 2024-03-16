@@ -66,12 +66,16 @@ const HabitCard: React.FC<Props> = ({ habit, entry, editHabit }) => {
 			}
 		};
 
+	const habitEntryToBeDone = entry.value === 'N';
+
 	return (
-		<Card className='flex items-center justify-between'>
+		<Card
+			className={`${
+				habitEntryToBeDone ? '' : 'opacity-80'
+			} flex items-center justify-between`}
+		>
 			<CardHeader
-				className={`${
-					entry.value !== 'N' ? 'line-through' : ''
-				} flex-1`}
+				className={`${habitEntryToBeDone ? '' : 'line-through'} flex-1`}
 			>
 				<CardTitle>{habit.name}</CardTitle>
 				<CardDescription>

@@ -2,7 +2,7 @@ import Loader from '@/components/layouts/Loader';
 import { api } from '../../../convex/_generated/api';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OverallProgressGraph, {
 	OverallProgressGraphProps,
 } from '@/components/app/habits/OverallProgressGraph';
@@ -56,7 +56,20 @@ const OverallProgress = () => {
 							}
 						/>
 					</div>
-				) : null
+				) : (
+					<div className='mt-8'>
+						<p className='text-lg lg:text-2xl font-medium'>
+							No habits found.{' '}
+							<Link
+								to='/app/new-habit'
+								className='underline text-green-500 hover:text-green-500/80 transition-all duration-300'
+							>
+								Create a habit
+							</Link>{' '}
+							to get started.
+						</p>
+					</div>
+				)
 			) : null}
 		</div>
 	);
