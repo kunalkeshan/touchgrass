@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as entry from "../entry.js";
 import type * as habit from "../habit.js";
+import type * as profile from "../profile.js";
 import type * as user from "../user.js";
 
 /**
@@ -29,6 +30,7 @@ import type * as user from "../user.js";
 declare const fullApi: ApiFromModules<{
   entry: typeof entry;
   habit: typeof habit;
+  profile: typeof profile;
   user: typeof user;
 }>;
 export declare const api: FilterApi<

@@ -1,5 +1,6 @@
 import { useUser, UserButton, SignOutButton } from '@clerk/clerk-react';
 import { Button } from '@/components/ui/button';
+import ExportDataBtn from '@/components/app/profile/ExportDataBtn';
 
 const Profile = () => {
 	const { user } = useUser();
@@ -45,15 +46,9 @@ const Profile = () => {
 					<div className='mt-4 grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-8'>
 						<p>
 							Download your data associated with this account.
-							(Note: Export format is JSON.) Coming soon.
+							(Note: Export format is JSON.)
 						</p>
-						<Button
-							variant={'secondary'}
-							className='w-fit'
-							disabled
-						>
-							Export Data
-						</Button>
+						<ExportDataBtn />
 					</div>
 				</section>
 				<section className='mt-4'>
