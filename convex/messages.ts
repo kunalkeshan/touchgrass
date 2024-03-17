@@ -1,32 +1,36 @@
-/*import { ChatOpenAI } from "langchain/openai";
-import { ChatPromptTemplate } from "langchain/core/prompts";
-import { StringOutputParser } from "langchain/core/output_parsers";
+import { mutation } from './_generated/server';
+import { v } from 'convex/values';
 
-const prompt = ChatPromptTemplate.fromMessages([
-    ["human"," Please give me some tips for being more consistent to {topic}."],
-])
-
-const model = new ChatOpenAI({});
-const parser = new StringOutputParser();
-
-const chain = prompt.pipe(model).pipe(parser);
-
-const response = await chain.invoke({
-        topic:"Cold Mailing"
-});*/
-
-/*import { query, mutation } from "./_generated/server";
-
-export const list = query(async (ctx) => {
-  return await ctx.db.query("messages").collect();
+export const getAllHabits = mutation({
+	args: { userId: v.id('users') },
+	handler: async (ctx, args) => {
+		return await ctx.db
+			.query('habits')
+			.filter((q) => q.eq(q.field('userId'), args.userId))
+			.collect();
+	},
 });
 
-export const send = mutation(async (ctx, { body }) => {
-  await ctx.db.insert("messages", {
-    body,
-    author: "user",
-  });
-  const botMessageId = await ctx.db.insert("messages", {
-    author: "assistant",
-  });
-});*/
+export const listMessagesForHabit = mutation({
+	args: { habitId: v.id('habits') },
+	handler: async (ctx, args) => {
+		return await ctx.db
+			.query('messages')
+			.filter((q) => q.eq(args.habitId, q.field('habitId')))
+			.order('asc')
+			.collect();
+	},
+});
+
+export const createUserMessageEntry = mutation({
+	args: { habitId: v.id('habits'), message: v.string() },
+	handler: async (ctx, args) => {
+		// await ctx.db.insert("messages", {
+		//   type: 'user',
+		//   habitId: args.habitId,
+		//   message: args.message,
+		// });
+		const habit = await ctx.db.get(args.habitId);
+		return habit?.name ?? 'habit';
+	},
+});

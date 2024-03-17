@@ -18,7 +18,7 @@ const Navbar = () => {
 							} flex flex-col md:flex-row max-w-[10ch] md:max-w-none items-center justify-center text-center gap-2 p-2 rounded-lg`}
 						>
 							<nav.Icon className='shrink-0' />
-							<span className='text-sm md:text-base lg:text-lg'>
+							<span className='text-sm md:text-base lg:text-lg hidden md:block'>
 								{nav.name}
 							</span>
 						</Link>

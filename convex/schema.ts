@@ -16,4 +16,9 @@ export default defineSchema({
 		// P for present, A for absent, N for not recorded
 		value: v.union(v.literal('P'), v.literal('A'), v.literal('N')),
 	}).index('by_habit', ['habitId']),
+	messages: defineTable({
+		habitId: v.id('habits'),
+		message: v.string(),
+		response: v.union(v.string(), v.null()),
+	}).index('by_habit', ['habitId']),
 });

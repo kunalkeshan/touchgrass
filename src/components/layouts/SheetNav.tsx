@@ -24,7 +24,7 @@ const SheetNav = () => {
 					<Menu />
 				</Button>
 			</SheetTrigger>
-			<SheetContent className='text-black'>
+			<SheetContent className='text-white bg-zinc-900 border-l-0'>
 				<SheetHeader>
 					<div>
 						<img
@@ -33,7 +33,7 @@ const SheetNav = () => {
 							className='w-12 h-auto object-cover'
 						/>
 					</div>
-					<SheetTitle>Touchgrass</SheetTitle>
+					<SheetTitle className='text-white'>Touchgrass</SheetTitle>
 					<SheetDescription>
 						Welcome to Touchgrass. Your habit tracking app.
 					</SheetDescription>
