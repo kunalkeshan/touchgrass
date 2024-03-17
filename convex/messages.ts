@@ -30,3 +30,20 @@ export const send = mutation(async (ctx, { body }) => {
     author: "assistant",
   });
 });*/
+
+import { query, mutation } from "./_generated/server";
+import { v } from "convex/values";
+
+export const list = query(async (ctx) => {
+  return await ctx.db.query("messages").collect();
+});
+
+export const send_prompt = mutation(async (ctx, { body }) => {
+  await ctx.db.insert("messages", {
+    author: "user",
+    body: "I need some help with this habit",
+  });
+  //const botMessageId = await ctx.db.insert("messages", {
+    //author: "assistant",
+  //});
+});
