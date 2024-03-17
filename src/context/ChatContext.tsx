@@ -75,8 +75,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const {
 		data: habits,
-		isLoading: habitsIsLoading,
-		isError: habitsIsError,
+		// isLoading: habitsIsLoading,
+		// isError: habitsIsError,
 	} = useQuery(['chat-room-habits'], async () => {
 		const userId = await storeUser();
 		const habits = await getAllHabits({ userId });
