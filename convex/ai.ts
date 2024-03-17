@@ -66,20 +66,23 @@ chat_model = ChatOpenAI(
 out = chat_model.predict("hi!")
 print(out)
 */
-
 import { v } from 'convex/values';
 import { action } from './_generated/server';
-import { api } from './_generated/api';
 import { ChatOpenAI } from '@langchain/openai';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
 const prompt = ChatPromptTemplate.fromMessages([
-	['human', 'For building consisteny to {topic}, tell me about {message}.'],
+	[
+		'human',
+		'For building consisteny to {topic}, tell me about {message} and give within 5 concise points. Do not break sentences or produce half-completed sentences.',
+	],
 ]);
 
 const model = new ChatOpenAI({
 	openAIApiKey: process.env.OPENAI_API_KEY,
+	temperature: 0.3,
+	maxTokens: 400,
 	modelName: 'mixtral-8x7b-inst-v0-1-32k',
 	configuration: {
 		baseURL: 'https://chat.tune.app/api/',
@@ -90,17 +93,12 @@ const parser = new StringOutputParser();
 const chain = RunnableSequence.from([prompt, model, parser]);
 
 export const chat = action({
-	args: { habitId: v.id('habits'), message: v.string() },
-	handler: async (ctx, args) => {
-		const habitName = await ctx.runMutation(
-			api.messages.createUserMessageEntry,
-			args
-		);
+	args: { habitName: v.string(), message: v.string() },
+	handler: async (_, args) => {
 		const response = await chain.invoke({
-			topic: habitName,
+			topic: args.habitName,
 			message: args.message,
 		});
-		console.log(response);
-		return 'action value';
+		return response;
 	},
 });

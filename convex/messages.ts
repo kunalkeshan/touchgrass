@@ -25,12 +25,20 @@ export const listMessagesForHabit = mutation({
 export const createUserMessageEntry = mutation({
 	args: { habitId: v.id('habits'), message: v.string() },
 	handler: async (ctx, args) => {
-		// await ctx.db.insert("messages", {
-		//   type: 'user',
-		//   habitId: args.habitId,
-		//   message: args.message,
-		// });
+		const messageId = await ctx.db.insert('messages', {
+			habitId: args.habitId,
+			prompt: args.message,
+			response: null,
+		});
+		const newMessage = await ctx.db.get(messageId);
 		const habit = await ctx.db.get(args.habitId);
-		return habit?.name ?? 'habit';
+		return { habitName: habit?.name ?? 'habit', newMessage: newMessage! };
+	},
+});
+
+export const updatePromptMessageEntry = mutation({
+	args: { messageId: v.id('messages'), response: v.string() },
+	handler: async (ctx, args) => {
+		await ctx.db.patch(args.messageId, { response: args.response });
 	},
 });

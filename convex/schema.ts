@@ -18,7 +18,7 @@ export default defineSchema({
 	}).index('by_habit', ['habitId']),
 	messages: defineTable({
 		habitId: v.id('habits'),
-		message: v.string(),
+		prompt: v.string(),
 		response: v.union(v.string(), v.null()),
 	}).index('by_habit', ['habitId']),
 });

@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Copy } from 'lucide-react';
 import { toast } from 'sonner';
+import { DataModel } from '../../../../convex/_generated/dataModel';
+import { ChatContext } from '@/context/ChatContext';
 
 type MessageProps = {
-	chat: {
-		prompt: string;
-		response: string;
-		_creationTime: number;
-	};
+	chat: DataModel['messages']['document'];
 };
 
 const Message: React.FC<MessageProps> = ({ chat }) => {
@@ -29,6 +27,7 @@ type BoxProps = {
 
 const Box: React.FC<BoxProps> = ({ chat, boxFor }) => {
 	const { user } = useUser();
+	const { chatLoading } = useContext(ChatContext);
 
 	const handleCopyGrassToucherText = (text: string) => async () => {
 		if (navigator.clipboard) {
@@ -44,7 +43,10 @@ const Box: React.FC<BoxProps> = ({ chat, boxFor }) => {
 	};
 
 	return (
-		<div className='flex gap-2'>
+		<div
+			className='flex gap-2'
+			id={chat.prompt.replace(/\s+/g, '-').toLowerCase()}
+		>
 			<div className='w-6 h-6 rounded-full overflow-hidden bg-white'>
 				<img
 					src={
@@ -65,7 +67,17 @@ const Box: React.FC<BoxProps> = ({ chat, boxFor }) => {
 						({new Date(chat._creationTime).toLocaleDateString()})
 					</span>
 				</p>
-				<p>{chat[boxFor as keyof MessageProps['chat']]}</p>
+				{boxFor === 'prompt' ? (
+					<p>{chat.prompt}</p>
+				) : chat.response === null && chatLoading ? (
+					<p className='animate-pulse text-sm'>Loading...</p>
+				) : (
+					<p
+						dangerouslySetInnerHTML={{
+							__html: chat.response || 'No response yet.',
+						}}
+					/>
+				)}
 				{boxFor === 'response' ? (
 					<div className='flex items-center gap-2 mt-2'>
 						<button
