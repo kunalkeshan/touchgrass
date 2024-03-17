@@ -15,6 +15,7 @@ const NewHabit = lazy(() => import('./pages/app/NewHabit'));
 const IndividualProgress = lazy(() => import('./pages/app/IndividualProgress'));
 const OverallProgress = lazy(() => import('./pages/app/OverallProgress'));
 const Profile = lazy(() => import('./pages/app/Profile'));
+const GrassToucher = lazy(() => import('./pages/app/GrassToucher'));
 
 // Others
 import ErrorPage from './components/layouts/ErrorPage';
@@ -73,6 +74,10 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 				path: 'me',
 				element: <Profile />,
 			},
+			{
+				path:'grass-toucher',
+				element: <GrassToucher />,
+			}
 		],
 		errorElement: <ErrorPage />,
 	},

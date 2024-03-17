@@ -6,6 +6,7 @@ import {
 	LucideIcon,
 	PlusCircle,
 	UserCircle,
+	Leaf
 } from 'lucide-react';
 
 type NavigationType = Readonly<{
@@ -68,9 +69,17 @@ export const APP_NAVIGATION: (NavigationType & { Icon: LucideIcon })[] = [
 		Icon: PlusCircle,
 	},
 	{
+		name: 'Grass Toucher',
+		url: '/app/grass-toucher',
+		target: '_self',
+		Icon: Leaf
+
+	},
+	{
 		name: 'Profile',
 		url: '/app/me',
 		target: '_self',
 		Icon: UserCircle,
 	},
+
 ];

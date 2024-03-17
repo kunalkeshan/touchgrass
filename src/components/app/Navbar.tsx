@@ -5,7 +5,7 @@ const Navbar = () => {
 	const location = useLocation();
 	return (
 		<nav className='w-full fixed bottom-0 p-4 md:px-16 bg-white/30 backdrop-blur'>
-			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto grid grid-cols-4 gap-4'>
+			<div className='w-full max-w-5xl 2xl:max-w-7xl mx-auto grid grid-cols-5 gap-5'>
 				{APP_NAVIGATION.map((nav) => {
 					return (
 						<Link
