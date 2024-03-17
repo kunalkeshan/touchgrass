@@ -90,7 +90,6 @@ export const getHabitAndEntries = mutation({
 			.query('entries')
 			.filter((q) => q.eq(q.field('habitId'), args.habitId))
 			.collect();
-		allEntries.sort((a, b) => sortByDate('asc')(a.date, b.date));
 		let [daysShowedUp, daysMissed, progress] = [0, 0, 1];
 		const entries = allEntries.map((entry) => {
 			if (entry.value === 'A') daysMissed++;
@@ -98,6 +97,7 @@ export const getHabitAndEntries = mutation({
 			progress = 1.01 ** (daysShowedUp - daysMissed);
 			return { ...entry, progress };
 		});
+		entries.sort((a, b) => sortByDate('asc')(a.date, b.date));
 		const averageProgress =
 			entries?.reduce((acc, curr) => acc + curr.progress, 0) /
 			entries?.length;
