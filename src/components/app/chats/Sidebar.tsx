@@ -54,6 +54,7 @@ const Sidebar = () => {
 						{habits.length > 0 ? (
 							habits.map((habit) => (
 								<HabitCard
+									habit={habit}
 									key={`habit-card-sidebar-${habit._id}`}
 									onClick={() => handleSelectHabit(habit._id)}
 								/>

@@ -5,7 +5,9 @@ import { ChatContext } from '@/context/ChatContext';
 import ChatInput from './ChatInput';
 
 const ChatRoom = () => {
-	const { selectedHabit, messages } = useContext(ChatContext);
+	const { selectedHabit, messages, habits } = useContext(ChatContext);
+
+	const currentHabit = habits?.find((habit) => habit._id === selectedHabit);
 
 	return (
 		<div className='flex-1 w-full min-h-[70vh] md:min-h-[76vh] flex flex-col mx-auto max-w-3xl'>
@@ -26,7 +28,7 @@ const ChatRoom = () => {
 			) : (
 				<section className='flex-1'>
 					<h1 className='text-xl lg:text-3xl font-semibold'>
-						Read for 5 mins
+						{currentHabit ? currentHabit.name : null}
 					</h1>
 					<ScrollArea className='mt-4 pb-4 h-[56vh] md:h-[62vh]'>
 						<div className='flex flex-col gap-4'>
