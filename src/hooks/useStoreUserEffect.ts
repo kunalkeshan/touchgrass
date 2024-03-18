@@ -5,6 +5,26 @@ import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { Id } from '../../convex/_generated/dataModel';
 
+/**
+ * React hook that manages user storage in the Convex database.
+ *
+ * This hook utilizes the Convex `useConvexAuth` and `useUser` hooks to retrieve authentication state and user information. It performs the following actions:
+ * 1. Tracks the user's authentication status using `isAuthenticated` from `useConvexAuth`.
+ * 2. Retrieves the current user object using `user` from `useUser`.
+ * 3. Maintains a local state variable `userId` (type `Id<'users'> | null`) to store the user ID.
+ * 4. Provides a mutation function `storeUser` using `useMutation` to interact with the `api.user.storeUser` mutation.
+ * 5. Utilizes a `useEffect` hook to:
+ *    - Check if the user is authenticated. If not, it exits without action.
+ *    - Calls the `createUser` function to store the user information in the database using the `storeUser` mutation.
+ *    - Sets the `userId` state variable with the ID returned by the `storeUser` mutation.
+ *    - Cleans up by setting `userId` to `null` on unmount.
+ *    - Re-runs the effect whenever `isAuthenticated`, `storeUser`, or `user?.id` changes to ensure proper handling of login/logout and potential user updates.
+ *
+ * This hook is typically used to manage user storage and retrieve the user ID within a React component.
+ *
+ * @returns {Id<'users'> | null} The ID of the stored user in the `users` table, or null if the user is not authenticated.
+ */
+
 export default function useStoreUserEffect() {
 	const { isAuthenticated } = useConvexAuth();
 	const { user } = useUser();
