@@ -60,7 +60,7 @@ const DeleteHabitDialog: React.FC<Props> = ({ habit, editHabit }) => {
 					/>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className='text-black'>
+			<DialogContent>
 				<DialogHeader>
 					<DialogTitle className='flex flex-col'>
 						<span className='text-sm lg:text-base text-slate-500 font-normal'>
@@ -76,7 +76,7 @@ const DeleteHabitDialog: React.FC<Props> = ({ habit, editHabit }) => {
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter className='sm:justify-normal'>
-					<DialogClose asChild className='w-full'>
+					<DialogClose asChild className='w-full text-black'>
 						<Button variant={'outline'}>Cancel</Button>
 					</DialogClose>
 					<DialogClose asChild>

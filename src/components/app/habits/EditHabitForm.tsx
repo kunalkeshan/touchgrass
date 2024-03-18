@@ -124,6 +124,7 @@ const EditHabitForm: React.FC<Props> = ({ habit, editHabit, close }) => {
 				/>
 				<Button
 					type='submit'
+					variant='secondary'
 					className={`${submitting ? 'animate-pulse' : ''} w-full`}
 					disabled={submitting}
 					onClick={() => {
