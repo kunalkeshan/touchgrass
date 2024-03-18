@@ -55,6 +55,10 @@ const ChatInput = () => {
 					<ArrowUp />
 				</Button>
 			</form>
+			<p className='text-xs lg:text-sm text-slate-300 text-center'>
+				Grass Toucher can make mistakes. Consider checking important.
+				information.
+			</p>
 		</section>
 	);
 };

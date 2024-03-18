@@ -167,6 +167,15 @@ export const deleteHabitAndEntries = mutation({
 				await ctx.db.delete(entry._id);
 			})
 		);
+		const messages = await ctx.db
+			.query('messages')
+			.filter((q) => q.eq(q.field('habitId'), args.habitId))
+			.collect();
+		await Promise.all(
+			messages.map(async (message) => {
+				await ctx.db.delete(message._id);
+			})
+		);
 		return await ctx.db.delete(args.habitId);
 	},
 });

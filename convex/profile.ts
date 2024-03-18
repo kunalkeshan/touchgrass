@@ -29,6 +29,20 @@ export const exportUserData = mutation({
 								: 'Not Marked',
 					};
 				});
+				const allMessages = await ctx.db
+					.query('messages')
+					.filter((q) => q.eq(q.field('habitId'), habit._id))
+					.collect();
+				const messages = allMessages.map((message) => {
+					return {
+						_id: message._id,
+						prompth: message.prompt,
+						resonse: message.response,
+						_creationTime: new Date(message._creationTime)
+							.toISOString()
+							.split('T')[0],
+					};
+				});
 				return {
 					name: habit.name,
 					_id: habit._id,
@@ -36,6 +50,7 @@ export const exportUserData = mutation({
 						.toISOString()
 						.split('T')[0],
 					entries,
+					messages,
 				};
 			})
 		);

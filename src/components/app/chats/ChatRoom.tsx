@@ -3,6 +3,7 @@ import Message from './Message';
 import { useContext } from 'react';
 import { ChatContext } from '@/context/ChatContext';
 import ChatInput from './ChatInput';
+import About from './About';
 
 const ChatRoom = () => {
 	const { selectedHabit, messages, habits } = useContext(ChatContext);
@@ -24,12 +25,16 @@ const ChatRoom = () => {
 						Have you touched grass today? or you maybe want to seek
 						the wisdom of the Grass Toucher?
 					</h1>
+					<About />
 				</section>
 			) : (
 				<section className='flex-1'>
-					<h1 className='text-xl lg:text-3xl font-semibold'>
-						{currentHabit ? currentHabit.name : null}
-					</h1>
+					<div className='w-full flex items-center justify-between'>
+						<h1 className='text-xl lg:text-3xl font-semibold'>
+							{currentHabit ? currentHabit.name : null}
+						</h1>
+						<About />
+					</div>
 					<ScrollArea className='mt-4 pb-4 h-[56vh] md:h-[62vh]'>
 						<div className='flex flex-col gap-4'>
 							{messages.length > 0 ? (
