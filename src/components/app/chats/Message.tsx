@@ -42,6 +42,10 @@ const Box: React.FC<BoxProps> = ({ chat, boxFor }) => {
 		}
 	};
 
+	const formatResponseWithNewLines = (response: string): string[] => {
+		return response.split(/\n+/g);
+	};
+
 	return (
 		<div
 			className='flex gap-2'
@@ -72,11 +76,27 @@ const Box: React.FC<BoxProps> = ({ chat, boxFor }) => {
 				) : chat.response === null && chatLoading ? (
 					<p className='animate-pulse text-sm'>Loading...</p>
 				) : (
-					<p
-						dangerouslySetInnerHTML={{
-							__html: chat.response || 'No response yet.',
-						}}
-					/>
+					<div>
+						{chat.response === null
+							? 'No response yet.'
+							: formatResponseWithNewLines(chat.response).map(
+									(line, index) => (
+										/**or line starts with a number 1. 2. and so on */
+										<p
+											key={index}
+											className={`${
+												line.startsWith('-') ||
+												/^\d+\.\s+/.test(line)
+													? 'ml-4 mt-2'
+													: ''
+											}`}
+										>
+											{line}
+										</p>
+									)
+									// eslint-disable-next-line no-mixed-spaces-and-tabs
+							  )}
+					</div>
 				)}
 				{boxFor === 'response' ? (
 					<div className='flex items-center gap-2 mt-2'>
