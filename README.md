@@ -1,5 +1,5 @@
 
-![Logo]("touchgrass\public\images\logo.png")
+![Logo]("C:\Users\Advith Krishnan\OneDrive\Desktop\Practice Files\Programming\Porjects\Langchian\touchgrass\public\images\logo.png")
 
 
 # Touchgrass ෴ 🌿
@@ -48,7 +48,7 @@ To deploy this project run
 
 ## Demo
 
-![[Video Here]("touchgrass\public\images\thumbnail.png")](https://www.youtube.com/watch?v=1P7Qr_x83Pw)
+![[Video Here]("C:\Users\Advith Krishnan\OneDrive\Desktop\Practice Files\Programming\Porjects\Langchian\touchgrass\public\images\thumbnail.png")](https://www.youtube.com/watch?v=1P7Qr_x83Pw)
 
 
 ## FAQ
