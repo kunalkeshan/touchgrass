@@ -1,6 +1,5 @@
 
-![Logo]("C:\Users\Advith Krishnan\OneDrive\Desktop\Practice Files\Programming\Porjects\Langchian\touchgrass\public\images\logo.png")
-
+![logo](https://github.com/kunalkeshan/touchgrass/assets/98768417/8364263d-b91c-4773-b954-2055935469bd)
 
 # Touchgrass ෴ 🌿
 
@@ -48,7 +47,8 @@ To deploy this project run
 
 ## Demo
 
-![[Video Here]("C:\Users\Advith Krishnan\OneDrive\Desktop\Practice Files\Programming\Porjects\Langchian\touchgrass\public\images\thumbnail.png")](https://www.youtube.com/watch?v=1P7Qr_x83Pw)
+[![Video Here](https://github.com/kunalkeshan/touchgrass/assets/98768417/b61fa459-4c28-418a-a766-606986bc330c)](https://www.youtube.com/watch?v=1P7Qr_x83Pw)
+
 
 
 ## FAQ
