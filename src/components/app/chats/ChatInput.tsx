@@ -41,7 +41,7 @@ const ChatInput = () => {
 			>
 				<Input
 					className='text-black'
-					placeholder='chat with grasstoucher'
+					placeholder='Chat with the Grass Toucher'
 					disabled={selectedHabit === null ? true : chatLoading}
 					name='message'
 				/>
@@ -56,7 +56,7 @@ const ChatInput = () => {
 				</Button>
 			</form>
 			<p className='text-xs lg:text-sm text-slate-300 text-center'>
-				Grass Toucher can make mistakes. Consider checking important.
+				Grass Toucher can make mistakes. Consider checking important
 				information.
 			</p>
 		</section>

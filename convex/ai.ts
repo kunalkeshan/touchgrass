@@ -1,97 +1,62 @@
 'use node';
 
-/*
-LlamaCpp
-
-import { LlamaCpp } from "@langchain/community/llms/llama_cpp";
-
-const llamaPath = "/Replace/with/path/to/your/model/gguf-llama2-q4_0.bin";
-const question = "Where do Llamas come from?";
-
-const model = new LlamaCpp({ modelPath: llamaPath });
-
-console.log(`You: ${question}`);
-const response = await model.invoke(question);
-console.log(`AI : ${response}`);
-*/
-
-/*
-Ollama
-
-import { ChatOllama } from "@langchain/community/chat_models/ollama";
-import { StringOutputParser } from "@langchain/core/output_parsers";
-
-const model = new ChatOllama({
-  baseUrl: "http://localhost:11434", // Default value
-  model: "llama2", // Default value
-});
-
-const stream = await model
-  .pipe(new StringOutputParser())
-  .stream(`Translate "I love programming" into German.`);
-
-const chunks = [];
-for await (const chunk of stream) {
-  chunks.push(chunk);
-}
-*/
-
-/**
-OpenAI
-import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { StringOutputParser } from '@langchain/core/output_parsers';
-import { RunnableSequence } from '@langchain/core/runnables';
-const prompt = ChatPromptTemplate.fromMessages([
-	['human', 'For building consisteny to {topic}, tell me about {message}.'],
-]);
-
-const model = new LlamaCpp({});
-const parser = new StringOutputParser();
-
-const chain = RunnableSequence.from([prompt, model, parser]);
- */
-
-/*
-Tune.ai
-
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-
-chat_model = ChatOpenAI(
-    openai_api_key="tune-9b9221be-996c-441b-9e08-5fc01f7f379f1710684965",
-    openai_api_base="https://chat.tune.app/api/",
-    model_name="mixtral-8x7b-inst-v0-1-32k"
-)
-
-out = chat_model.predict("hi!")
-print(out)
-*/
 import { v } from 'convex/values';
 import { action } from './_generated/server';
 import { ChatOpenAI } from '@langchain/openai';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
+
+/**
+ * Prompt template which is set before feeding into the LLM.
+ * Definition of `prompt` : {@link ChatPromptTemplate}
+ */
 const prompt = ChatPromptTemplate.fromMessages([
 	[
 		'human',
-		'For building consisteny to {topic}, tell me about {message} and give within 5 concise points. Do not break sentences or produce half-completed sentences.',
+		'Given the context, you are a helpful assistant, known as the Grass Toucher, and a supportive friend who usually has general friendly conversations with me but also help me {topic}, respond to the following prompt. {message).',
 	],
 ]);
 
+/**
+ * The Large Language Model which generates responses based on the text prompt given.
+ * Definition of `model` : {@link ChatOpenAI}
+ */
 const model = new ChatOpenAI({
 	openAIApiKey: process.env.OPENAI_API_KEY,
-	temperature: 0.3,
-	maxTokens: 400,
-	modelName: 'mixtral-8x7b-inst-v0-1-32k',
+	frequencyPenalty: 3,
+	presencePenalty: 2,
+	temperature: 0.2,
+	maxTokens: 500,
+	modelName: 'goliath-120b-16k-gptq',
 	configuration: {
 		baseURL: 'https://chat.tune.app/api/',
 	},
 });
+
+/**
+ * Definition of `parser` : {@link StringOutputParser}
+ */
 const parser = new StringOutputParser();
 
+/**
+ * Definition of `chain` : {@link RunnableSequence}
+ */
 const chain = RunnableSequence.from([prompt, model, parser]);
 
+/**
+ * Defines a server action for handling chat requests with {@link chain}.
+ *
+ * This function takes the user's habit name (`habitName`) and message (`message`) as arguments and utilizes a pre-defined processing chain (`chain`) to interact with an OpenAI chat model.
+ *  - The {@link chain} likely performs the following steps:
+ *      1. Applies a chat prompt template to the user's input, incorporating the habit name and defined in {@link prompt}.
+ *      2. Sends the formatted prompt to the chat model, defined in {@link chain}.
+ *      3. Parses the raw response from the model using a {@link parser}.
+ *
+ * @param {string} habitName - The name of the habit the user is referring to.
+ * @param {string} message - The user's chat message.
+ * @returns {Promise<any>} A promise that resolves to the parsed response from the `chain`. The exact format of the response may depend on the implementation of the `chain`.
+ */
 export const chat = action({
 	args: { habitName: v.string(), message: v.string() },
 	handler: async (_, args) => {

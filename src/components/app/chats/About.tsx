@@ -27,7 +27,7 @@ const About = () => {
 					<TooltipContent>Hey, I'm Grass Toucher...</TooltipContent>
 				</Tooltip>
 			</DialogTrigger>
-			<DialogContent className='text-black text-justify'>
+			<DialogContent className='text-neutral-300 text-justify'>
 				<DialogHeader>
 					<DialogTitle className='text-center'>
 						Introducing Grass Toucher
@@ -36,7 +36,7 @@ const About = () => {
 						Your Personal Habit Companion
 					</DialogDescription>
 				</DialogHeader>
-				<div className='max-w-[4rem] mx-auto'>
+				<div className='max-w-[6rem] mx-auto'>
 					<img
 						src={'/images/chats/grasstoucher.png'}
 						alt='grass toucher'
@@ -49,7 +49,7 @@ const About = () => {
 				</p>
 				<p>
 					I'm not your average chatbot – I'm here to help you
-					cultivate positive habits, track your progress, and provide
+					cultivate positive habits, give you valuable tips and provide
 					guidance along the way. Whether you're looking for
 					motivation, advice, or just a friendly chat about your
 					habits, I've got you covered.
