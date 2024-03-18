@@ -8,8 +8,6 @@
 
 Touchgrass goes beyond traditional habit-tracking apps by offering a ***holistic*** approach to self-improvement.
 
-Touchgrass utilizes cutting-edge technology to deliver this unique experience, including:
-
 
 ## Features
 
