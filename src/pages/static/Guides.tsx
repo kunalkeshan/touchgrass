@@ -1,15 +1,6 @@
 import GuideCard from '@/components/guides/GuideCard';
 import { Guide } from '@/constants/guides';
-import { fetchAllGuides } from '@/lib/guides';
 import { useLoaderData } from 'react-router-dom';
-
-// eslint-disable-next-line react-refresh/only-export-components
-export async function loader() {
-	const guides = await fetchAllGuides({
-		sort: { by: 'date', order: 'desc' },
-	});
-	return { guides };
-}
 
 const Guides = () => {
 	const { guides } = useLoaderData() as { guides: Guide[] };

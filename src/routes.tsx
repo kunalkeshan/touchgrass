@@ -21,10 +21,12 @@ const GrassToucher = lazy(() => import('./pages/app/GrassToucher'));
 import ErrorPage from './components/layouts/ErrorPage';
 
 // Loaders
-import { loader as rootLoader } from './pages/static/Landing';
-import { loader as newHabitLoader } from './pages/app/NewHabit';
-import { loader as guidesLoader } from './pages/static/Guides';
-import { loader as individualGuideLoader } from './pages/static/IndividualGuide';
+import {
+	rootLoader,
+	guidesLoader,
+	individualGuideLoader,
+	newHabitLoader,
+} from './services/loaders';
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 	{
@@ -75,9 +77,9 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 				element: <Profile />,
 			},
 			{
-				path:'grass-toucher',
+				path: 'grass-toucher',
 				element: <GrassToucher />,
-			}
+			},
 		],
 		errorElement: <ErrorPage />,
 	},

@@ -19,15 +19,8 @@ import { api } from '../../../convex/_generated/api';
 import { useState } from 'react';
 import { RotateCw } from 'lucide-react';
 import { queryClient } from '@/main';
-import { fetchSingleResource } from '@/lib/guides';
 import { Guide } from '@/constants/guides';
 import GuideCard from '@/components/guides/GuideCard';
-
-// eslint-disable-next-line react-refresh/only-export-components
-export async function loader() {
-	const guide = await fetchSingleResource('choosing-habits');
-	return { guide };
-}
 
 const formSchema = z.object({
 	name: z

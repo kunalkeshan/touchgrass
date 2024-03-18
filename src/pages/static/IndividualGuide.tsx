@@ -1,26 +1,10 @@
 import { Guide } from '@/constants/guides';
-import { fetchSingleResource } from '@/lib/guides';
-import {
-	Link,
-	LoaderFunctionArgs,
-	redirect,
-	useLoaderData,
-} from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import footnotes from 'remark-footnotes';
 import ReactMarkdown from 'react-markdown';
 import Header from '@/components/guides/Header';
-
-// eslint-disable-next-line react-refresh/only-export-components
-export async function loader({ params }: LoaderFunctionArgs) {
-	try {
-		const guide = await fetchSingleResource(params.guideURL ?? '');
-		return { guide };
-	} catch (error) {
-		return redirect('/guides');
-	}
-}
 
 const IndividualGuide = () => {
 	const { guide } = useLoaderData() as { guide: Guide };
