@@ -61,7 +61,7 @@ const Features = () => {
 			title: 'Personalized Recommendations',
 			description:
 				'Receive tailored book recommendations based on your habits and interests.',
-			ready: false,
+			ready: true,
 			Icon: BookHeart,
 		},
 		{

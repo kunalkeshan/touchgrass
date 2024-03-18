@@ -14,8 +14,10 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as ai from "../ai.js";
 import type * as entry from "../entry.js";
 import type * as habit from "../habit.js";
+import type * as messages from "../messages.js";
 import type * as profile from "../profile.js";
 import type * as user from "../user.js";
 
@@ -28,8 +30,10 @@ import type * as user from "../user.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  ai: typeof ai;
   entry: typeof entry;
   habit: typeof habit;
+  messages: typeof messages;
   profile: typeof profile;
   user: typeof user;
 }>;
