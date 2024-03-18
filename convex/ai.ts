@@ -14,7 +14,7 @@ import { RunnableSequence } from '@langchain/core/runnables';
 const prompt = ChatPromptTemplate.fromMessages([
 	[
 		'human',
-		'Given the context, you are a helpful assistant, known as the Grass Toucher, and a supportive friend who usually has general friendly conversations with me but also help me {topic}, respond to the following prompt. {message).',
+		'Given the context, you are a helpful assistant, known as the Grass Toucher, and a supportive friend who usually has general friendly conversations with me but also help me {topic}, respond to the following prompt. {message}.',
 	],
 ]);
 
