@@ -55,10 +55,10 @@ To deploy this project run
 
 #### 1) How is it different from any other Habit Builder App?
 
-Touchgrass aims to combine all the necessities for building a habit. We, the developers of Touchgrass truly believe the following are the most essential considerations for building a habit and provide meaningful solutions for the same.
+Touchgrass aims to combine all the necessities for anyone to build a habit. We, the developers of Touchgrass truly believe the following are the most essential considerations for building a habit and provide meaningful solutions for the same.
 - **Consistency**, tracked by our graphing and analytics tools and interactive user interface.
 - **Philosophy**, established by the ideology of minimal increments of effort leading to massive improvements in the future.
-- **Guidance**, provided by a one-to-one chat guide who can assist you differently for different habits, but overall making your growth stable and constant.
+- **Guidance**, provided by a one-on-one chat guide who can assist you differently for different habits, while making your growth stable and constant.
 
 #### 2) How does Touchgrass benefit me?
 
