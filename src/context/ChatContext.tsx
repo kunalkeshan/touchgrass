@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { useMutation, useAction } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { toast } from 'sonner';
+import Loader from '@/components/layouts/Loader';
 
 type ChatState = {
 	selectedHabit: Id<'habits'> | null;
@@ -126,24 +127,25 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const {
 		data: habits,
-		// isLoading: habitsIsLoading,
-		// isError: habitsIsError,
+		isLoading: habitsIsLoading,
+		isError: habitsIsError,
 	} = useQuery(['chat-room-habits'], async () => {
 		const userId = await storeUser();
 		const habits = await getAllHabits({ userId });
 		return habits;
 	});
 
-	const { data: messages } = useQuery(
-		['chat-room-messages', state.selectedHabit],
-		async () => {
-			if (!state.selectedHabit) return;
-			const messages = await listMessagesForHabit({
-				habitId: state.selectedHabit,
-			});
-			return messages;
-		}
-	);
+	const {
+		data: messages,
+		isLoading: messagesIsLoading,
+		isError: messagesIsError,
+	} = useQuery(['chat-room-messages', state.selectedHabit], async () => {
+		if (!state.selectedHabit) return;
+		const messages = await listMessagesForHabit({
+			habitId: state.selectedHabit,
+		});
+		return messages;
+	});
 
 	useEffect(() => {
 		if (habits) setHabits(habits);
@@ -164,7 +166,13 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 				setChatLoading,
 			}}
 		>
-			{children}
+			{habitsIsLoading || messagesIsLoading ? (
+				<Loader />
+			) : habitsIsError || messagesIsError ? (
+				<div>Error loading data.</div>
+			) : (
+				children
+			)}
 		</ChatContext.Provider>
 	);
 };

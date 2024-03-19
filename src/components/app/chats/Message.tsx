@@ -11,7 +11,7 @@ type MessageProps = {
 
 const Message: React.FC<MessageProps> = ({ chat }) => {
 	return (
-		<div className='flex flex-col gap-2'>
+		<div className='flex flex-col gap-2 pr-2'>
 			<Box boxFor={'prompt'} chat={chat} />
 			<Box boxFor={'response'} chat={chat} />
 		</div>
@@ -74,12 +74,17 @@ const Box: React.FC<BoxProps> = ({ chat, boxFor }) => {
 				{boxFor === 'prompt' ? (
 					<p>{chat.prompt}</p>
 				) : chat.response === null && chatLoading ? (
-					<p className='animate-pulse text-sm'>Loading...</p>
+					<p className='animate-pulse text-sm'>
+						Collecting wisdom...
+					</p>
 				) : (
 					<div>
 						{chat.response === null
 							? 'No response yet.'
-							: formatResponseWithNewLines(chat.response).map(
+							: formatResponseWithNewLines(
+									chat.response.trim()
+									// eslint-disable-next-line no-mixed-spaces-and-tabs
+							  ).map(
 									(line, index) => (
 										/**or line starts with a number 1. 2. and so on */
 										<p
@@ -91,14 +96,14 @@ const Box: React.FC<BoxProps> = ({ chat, boxFor }) => {
 													: ''
 											}`}
 										>
-											{line}
+											{line.trim()}
 										</p>
 									)
 									// eslint-disable-next-line no-mixed-spaces-and-tabs
 							  )}
 					</div>
 				)}
-				{boxFor === 'response' ? (
+				{boxFor === 'response' && chat.response !== null ? (
 					<div className='flex items-center gap-2 mt-2'>
 						<button
 							className='hover:text-green-500 transition-all duration-300'
