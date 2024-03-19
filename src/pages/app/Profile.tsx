@@ -1,6 +1,9 @@
+import { lazy } from 'react';
 import { useUser, UserButton, SignOutButton } from '@clerk/clerk-react';
 import { Button } from '@/components/ui/button';
-import ExportDataBtn from '@/components/app/profile/ExportDataBtn';
+const ExportDataBtn = lazy(
+	() => import('@/components/app/profile/ExportDataBtn')
+);
 
 const Profile = () => {
 	const { user } = useUser();

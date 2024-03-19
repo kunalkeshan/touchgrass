@@ -1,6 +1,7 @@
-import GuideCard from '@/components/guides/GuideCard';
+import { lazy } from 'react';
 import { Guide } from '@/constants/guides';
 import { useLoaderData } from 'react-router-dom';
+const GuideCard = lazy(() => import('@/components/guides/GuideCard'));
 
 const Guides = () => {
 	const { guides } = useLoaderData() as { guides: Guide[] };

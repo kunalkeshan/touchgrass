@@ -1,3 +1,4 @@
+import { useState, lazy } from 'react';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -16,11 +17,10 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
-import { useState } from 'react';
 import { RotateCw } from 'lucide-react';
 import { queryClient } from '@/main';
 import { Guide } from '@/constants/guides';
-import GuideCard from '@/components/guides/GuideCard';
+const GuideCard = lazy(() => import('@/components/guides/GuideCard'));
 
 const formSchema = z.object({
 	name: z

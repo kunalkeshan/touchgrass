@@ -1,10 +1,12 @@
+import { lazy } from 'react';
 import { Guide } from '@/constants/guides';
 import { Link, useLoaderData } from 'react-router-dom';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import footnotes from 'remark-footnotes';
 import ReactMarkdown from 'react-markdown';
-import Header from '@/components/guides/Header';
+
+const Header = lazy(() => import('@/components/guides/Header'));
 
 const IndividualGuide = () => {
 	const { guide } = useLoaderData() as { guide: Guide };
@@ -36,6 +38,8 @@ const IndividualGuide = () => {
 						rehypePlugins={[rehypeRaw]}
 						className='[&>*]:mt-4 text-lg'
 						components={{
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
 							h1: (props) => <Header {...props} data={guide} />,
 							h2: ({ children, ...props }) => (
 								<h2

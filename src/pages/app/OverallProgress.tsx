@@ -1,11 +1,13 @@
+import { lazy } from 'react';
 import Loader from '@/components/layouts/Loader';
 import { api } from '../../../convex/_generated/api';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
-import OverallProgressGraph, {
-	OverallProgressGraphProps,
-} from '@/components/app/habits/OverallProgressGraph';
+import { OverallProgressGraphProps } from '@/components/app/habits/OverallProgressGraph';
+const OverallProgressGraph = lazy(
+	() => import('@/components/app/habits/OverallProgressGraph')
+);
 
 const OverallProgress = () => {
 	const navigate = useNavigate();

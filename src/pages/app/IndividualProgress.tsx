@@ -1,11 +1,16 @@
+import { lazy } from 'react';
 import { api } from '../../../convex/_generated/api';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Id } from 'convex/_generated/dataModel';
-import Loader from '@/components/layouts/Loader';
-import ContributionsGraph from '@/components/app/habits/ContributionsGraph';
-import OnePercentStats from '@/components/app/habits/OnePercentStats';
+const Loader = lazy(() => import('@/components/layouts/Loader'));
+const ContributionsGraph = lazy(
+	() => import('@/components/app/habits/ContributionsGraph')
+);
+const OnePercentStats = lazy(
+	() => import('@/components/app/habits/OnePercentStats')
+);
 
 const IndividualProgress = () => {
 	const navigate = useNavigate();

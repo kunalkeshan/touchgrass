@@ -15,7 +15,7 @@ type DatePickerProps = React.ComponentProps<'div'> & {
 	setDate: React.Dispatch<React.SetStateAction<Date>>;
 };
 
-export function DatePicker({ date, setDate }: DatePickerProps) {
+export default function DatePicker({ date, setDate }: DatePickerProps) {
 	const { user } = useUser();
 	const [open, setOpen] = React.useState(false);
 

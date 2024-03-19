@@ -1,12 +1,12 @@
+import { useEffect, useReducer, useState, lazy } from 'react';
 import { api } from '../../../convex/_generated/api';
 import { useConvexAuth, useMutation } from 'convex/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import HabitCard from '@/components/app/habits/HabitCard';
-import { useEffect, useReducer, useState } from 'react';
 import { DataModel } from '../../../convex/_generated/dataModel';
-import Loader from '@/components/layouts/Loader';
-import { DatePicker } from '@/components/app/DatePicker';
+const HabitCard = lazy(() => import('@/components/app/habits/HabitCard'));
+const Loader = lazy(() => import('@/components/layouts/Loader'));
+const DatePicker = lazy(() => import('@/components/app/DatePicker'));
 
 type CombinedHabits = {
 	habit: DataModel['habits']['document'];

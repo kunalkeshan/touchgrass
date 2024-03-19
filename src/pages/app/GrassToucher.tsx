@@ -1,6 +1,7 @@
-import Sidebar from '@/components/app/chats/Sidebar';
-import ChatRoom from '@/components/app/chats/ChatRoom';
+import { lazy } from 'react';
 import { ChatProvider } from '@/context/ChatContext';
+const Sidebar = lazy(() => import('@/components/app/chats/Sidebar'));
+const ChatRoom = lazy(() => import('@/components/app/chats/ChatRoom'));
 
 const GrassToucher = () => {
 	return (

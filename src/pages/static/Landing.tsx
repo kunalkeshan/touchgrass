@@ -1,9 +1,10 @@
-import Hero from '../../components/landing/Hero';
-import Features from '../../components/landing/Features';
-import Guides from '@/components/landing/Guides';
-import Demo from '@/components/landing/Demo';
+import { lazy } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { Guide } from '@/constants/guides';
+const Hero = lazy(() => import('../../components/landing/Hero'));
+const Features = lazy(() => import('../../components/landing/Features'));
+const Guides = lazy(() => import('@/components/landing/Guides'));
+const Demo = lazy(() => import('@/components/landing/Demo'));
 
 const Landing = () => {
 	const { guides } = useLoaderData() as { guides: Guide[] };
