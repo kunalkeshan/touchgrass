@@ -5,7 +5,7 @@ const Demo = () => {
 				<div className='aspect-video max-w-3xl mx-auto'>
 					<iframe
 						className='w-full h-full'
-						src='https://www.youtube.com/embed/xcxlq-u_PiM?si=xv6cCDz3wTutpzL3'
+						src='https://www.youtube.com/watch?v=xcxlq-u_PiM'
 						title='YouTube video player'
 						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 						allowFullScreen
