@@ -17,6 +17,7 @@ import {
 	guidesLoader,
 	individualGuideLoader,
 } from './services/loaders';
+import Info from './pages/static/Info';
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 	{
@@ -27,6 +28,10 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
 				index: true,
 				element: <Landing />,
 				loader: rootLoader,
+			},
+			{
+				path: 'info',
+				element: <Info />,
 			},
 			{
 				path: 'guides',
