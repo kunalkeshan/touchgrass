@@ -33,35 +33,35 @@ const Features = () => {
 			title: 'Create New Habits',
 			description:
 				'Start your growth journey by setting new habits aligned with your goals.',
-			ready: true,
+			ready: false,
 			Icon: BadgePlus,
 		},
 		{
 			title: 'Track on a Daily Basis',
 			description:
 				'Easily monitor and celebrate your progress with daily habit tracking.',
-			ready: true,
+			ready: false,
 			Icon: ListPlus,
 		},
 		{
 			title: '1% Model Calculation',
 			description:
 				'Track your progress with our unique 1% model, focusing on gradual improvement.',
-			ready: true,
+			ready: false,
 			Icon: ArrowUp10,
 		},
 		{
 			title: 'Contributions Graph',
 			description:
 				'Visualize your progress with detailed habit contribution graphs.',
-			ready: true,
+			ready: false,
 			Icon: Grid3X3,
 		},
 		{
 			title: 'Personalized Recommendations',
 			description:
 				'Receive tailored book recommendations based on your habits and interests.',
-			ready: true,
+			ready: false,
 			Icon: BookHeart,
 		},
 		{

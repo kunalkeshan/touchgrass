@@ -11,12 +11,6 @@ export async function rootLoader() {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export async function newHabitLoader() {
-	const guide = await fetchSingleResource('choosing-habits');
-	return { guide };
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
 export async function guidesLoader() {
 	const guides = await fetchAllGuides({
 		sort: { by: 'date', order: 'desc' },

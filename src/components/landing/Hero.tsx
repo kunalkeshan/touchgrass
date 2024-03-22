@@ -1,5 +1,3 @@
-import { SignInButton } from '@clerk/clerk-react';
-import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -80,26 +78,9 @@ const Hero = () => {
 					</div>
 				</div>
 				<div className='mt-8 flex gap-4 justify-center'>
-					<Authenticated>
-						<Button className='' variant={'secondary'} asChild>
-							<Link to={'/app'}>App</Link>
-						</Button>
-					</Authenticated>
-					<Unauthenticated>
-						<Button className='' variant={'secondary'} asChild>
-							<SignInButton
-								afterSignInUrl='/app'
-								afterSignUpUrl='/app'
-							>
-								Get Started
-							</SignInButton>
-						</Button>
-					</Unauthenticated>
-					<AuthLoading>
-						<Button className='' variant={'secondary'} disabled>
-							Loading
-						</Button>
-					</AuthLoading>
+					<Button variant={'outline'} className='text-black' asChild>
+						<Link to='/info'>Info.</Link>
+					</Button>
 					<Button asChild className='bg-black hover:bg-black/80'>
 						<Link to={'/#features'}>View features</Link>
 					</Button>

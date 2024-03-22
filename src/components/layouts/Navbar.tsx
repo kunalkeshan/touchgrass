@@ -1,5 +1,3 @@
-import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react';
-import { SignInButton } from '@clerk/clerk-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { NAVBAR_NAVIGATION } from '@/constants/navigation';
@@ -41,25 +39,9 @@ const Navbar = () => {
 					))}
 				</ul>
 				<div className='flex items-center gap-2'>
-					<Authenticated>
-						<Button
-							variant={'outline'}
-							className='text-black'
-							asChild
-						>
-							<Link to='/app'>App</Link>
-						</Button>
-					</Authenticated>
-					<Unauthenticated>
-						<Button variant={'secondary'} asChild>
-							<SignInButton>Get Started</SignInButton>
-						</Button>
-					</Unauthenticated>
-					<AuthLoading>
-						<Button variant={'secondary'} disabled>
-							Loading
-						</Button>
-					</AuthLoading>
+					<Button variant={'outline'} className='text-black' asChild>
+						<Link to='/info'>Info.</Link>
+					</Button>
 					<SheetNav />
 				</div>
 			</div>
