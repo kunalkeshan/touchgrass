@@ -54,7 +54,13 @@ const Hero = () => {
 						<u>apologize for any inconvenience</u> and appreciate
 						your understanding as we work towards bringing you an
 						even better platform for your personal growth journey.{' '}
-						<u>Thank you for your patience!</u>
+						<u>Thank you for your patience!</u>{' '}
+						<Link
+							to='/info'
+							className='underline text-green-500 hover:text-opacity-80 transition-all duration-300'
+						>
+							Learn more here...
+						</Link>
 					</AlertDescription>
 				</Alert>
 				<h1 className='text-2xl lg:text-4xl text-center font-bold mt-8'>
