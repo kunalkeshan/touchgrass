@@ -1,3 +1,4 @@
+import Demo from '@/components/landing/Demo';
 import { Link } from 'react-router-dom';
 
 const Info = () => {
@@ -75,6 +76,7 @@ const Info = () => {
 					</p>
 					<p>Warm regards, Team @ touchgrass</p>
 				</div>
+				<Demo videoId='7QmytB9sTEo' />
 			</div>
 		</div>
 	);

@@ -11,7 +11,7 @@ const Landing = () => {
 	return (
 		<div>
 			<Hero />
-			<Demo />
+			<Demo videoId='xcxlq-u_PiM' />
 			<Features />
 			<Guides guides={guides} />
 		</div>
