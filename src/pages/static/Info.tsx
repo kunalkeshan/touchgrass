@@ -2,6 +2,25 @@ import Demo from '@/components/landing/Demo';
 import { Link } from 'react-router-dom';
 
 const Info = () => {
+	const TOUCHGRASS_SOCIALS = [
+		{
+			title: 'instagram',
+			link: 'https://instagram.com/tchgrsscom',
+		},
+		{
+			title: 'twitter',
+			link: 'https://twitter.com/tchgrsscom',
+		},
+		{
+			title: 'linkedin',
+			link: 'https://linkedin.com/company/tchgrsscom',
+		},
+		{
+			title: 'youtube',
+			link: 'https://youtube.com/@tchgrsscom',
+		},
+	];
+
 	return (
 		<div className='p-4 md:p-16 bg-[url(/images/bg-lines.png)] min-h-[60vh]'>
 			<div className='w-full max-w-3xl 2xl:max-w-5xl mx-auto'>
@@ -60,13 +79,17 @@ const Info = () => {
 					<p>
 						If you loved what touchgrass offered and want to keep up
 						with our progress, feel free to reach out! We'd love to{' '}
-						<Link
-							to='https://x.com/_kunalkeshan_'
-							target='_blank'
-							className='underline text-green-500 hover:text-opacity-80 trasnition-all duration-300'
-						>
-							stay connected
-						</Link>{' '}
+						stay connected with us on our{' '}
+						{TOUCHGRASS_SOCIALS.map((social) => (
+							<Link
+								to={social.link}
+								key={social.title + '-touchgrass'}
+								target='_blank'
+								className='underline text-green-500 hover:text-opacity-80 trasnition-all duration-300'
+							>
+								{social.title},
+							</Link>
+						))}{' '}
 						and keep you in the loop as we work on bringing you an
 						even better touchgrass experience.
 					</p>
